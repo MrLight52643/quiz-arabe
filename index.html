@@ -1,0 +1,4205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>بَيْنَ يَدَيْكَ — Quiz Arabe · pluriels & verbes</title>
+<meta name="theme-color" content="#5d3a1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="بَيْنَ يَدَيْكَ">
+<meta name="application-name" content="Quiz Arabe BYY">
+<meta name="msapplication-TileColor" content="#5d3a1a">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#fdf6ed;color:#3e2010;min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;font-family:inherit;border:none;outline:none;-webkit-tap-highlight-color:transparent}
+button:active{transform:scale(.97)}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 15% 10%,#f5e6c8 0%,transparent 55%),radial-gradient(ellipse at 85% 85%,#e8d5b0 0%,transparent 55%)}
+#app{max-width:740px;margin:0 auto;padding:16px 14px 60px;position:relative;z-index:1}
+.hdr{text-align:center;margin-bottom:18px}
+.hdr-ar{font-size:2.6rem;color:#5d3a1a;line-height:1.2;text-shadow:0 2px 8px rgba(93,58,26,.12);font-family:'Traditional Arabic','Times New Roman',serif}
+.hdr-sub{font-size:.82rem;color:#8b5e3c;font-style:italic;margin:4px 0 8px}
+.hdr-badge{display:inline-block;background:#5d3a1a;color:#fdf6ed;border-radius:20px;padding:3px 14px;font-size:.7rem;font-weight:700}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
+.tab{padding:8px 16px;border-radius:20px;border:2px solid #c8a882;background:#fff;color:#8b5e3c;font-size:.8rem;font-weight:700;transition:all .2s}
+.tab.on,.tab:hover{background:#5d3a1a;color:#fdf6ed;border-color:#5d3a1a}
+.sb{background:#fff;border:2px solid #e8d5b0;border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.sb-t{font-size:.68rem;color:#a07850;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:7px 14px;border-radius:20px;border:2px solid #c8a882;background:#fff;color:#8b5e3c;font-size:.78rem;font-weight:600;transition:all .2s}
+.chip.on,.chip:hover{background:#5d3a1a;color:#fdf6ed;border-color:#5d3a1a}
+.grid{display:grid;grid-template-columns:1fr;gap:7px;margin-top:6px}
+.card{display:flex;align-items:center;gap:10px;padding:13px 15px;background:#fff;border:2px solid #e8d5b0;border-radius:12px;text-align:left;font-family:inherit;box-shadow:0 2px 8px rgba(93,58,26,.05);transition:all .2s}
+.card:hover{border-color:#5d3a1a;box-shadow:0 4px 14px rgba(93,58,26,.12)}
+.card.all{background:#5d3a1a;color:#fff;border-color:#5d3a1a}
+.card.ta{background:#8b5e3c;color:#fff;border-color:#8b5e3c}
+.cnum{width:26px;height:26px;border-radius:50%;background:#f5e6c8;color:#5d3a1a;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.7rem;flex-shrink:0}
+.card.all .cnum,.card.ta .cnum{background:rgba(255,255,255,.2);color:#fdf6ed}
+.clbl{flex:1;font-size:.8rem;font-weight:600;color:inherit}
+.cbdg{font-size:.65rem;color:#a07850;background:#f5e6c8;padding:2px 8px;border-radius:10px;flex-shrink:0}
+.card.all .cbdg,.card.ta .cbdg{background:rgba(255,255,255,.18);color:#fdf6ed}
+.tagrow{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.mini-badge{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:20px;padding:0 7px;border-radius:999px;font-size:.62rem;font-weight:900;line-height:1;border:1px solid rgba(93,58,26,.18)}
+.mini-badge.plural{background:#b5451b;color:#fff;border-color:#7a2f12;font-family:'Traditional Arabic','Times New Roman',serif;font-size:.78rem}
+.mini-badge.verb{background:#f5e6c8;color:#5d3a1a}
+.card.all .mini-badge,.card.ta .mini-badge{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.18)}
+.qt{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.qbk{background:none;color:#8b5e3c;font-size:.82rem;font-weight:600}
+.qcn{font-size:.82rem;color:#8b5e3c;font-weight:700}
+.qsc{font-size:.75rem;color:#5d3a1a;font-weight:800;background:#f5e6c8;padding:3px 11px;border-radius:14px}
+.pbar{height:7px;background:#e8d5b0;border-radius:4px;margin-bottom:14px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,#c8a882,#5d3a1a);border-radius:4px;transition:width .4s}
+.streak{text-align:center;font-size:.78rem;color:#e65100;font-weight:800;margin-bottom:8px;animation:pulse .6s}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.qcard{background:#fff;border-radius:18px;padding:28px 18px;text-align:center;box-shadow:0 4px 20px rgba(93,58,26,.11);border:2px solid #e8d5b0;margin-bottom:14px;min-height:130px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:fi .3s}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.qdir{font-size:.65rem;color:#a07850;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.qar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:2rem;color:#3e2010;font-weight:700;line-height:1.5;direction:rtl}
+.qfr{font-size:1.5rem;color:#3e2010;font-weight:700;font-style:italic}
+.opts{display:grid;gap:12px}
+.ob{display:flex;align-items:center;gap:8px;padding:10px 8px;background:#fff;border:2px solid #e8d5b0;border-radius:14px;color:#3e2010;text-align:left;min-height:54px;box-shadow:0 3px 10px rgba(93,58,26,.07);transition:all .25s;word-break:normal;overflow:visible}
+.ob:hover{border-color:#c8a882;background:#faf3e6}
+.ob.ok{background:#e8f5e9;border-color:#43a047;color:#1b5e20;animation:fi .3s}
+.ob.bad{background:#fdecea;border-color:#e53935;color:#b71c1c;animation:shk .4s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ob.dim{opacity:.3;pointer-events:none}
+.ol{width:16px;height:16px;border-radius:50%;background:#f5e6c8;color:#5d3a1a;display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:800;flex-shrink:0;opacity:.5}
+.ot{font-size:.9rem;font-weight:700;line-height:1.3}.ot.ar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:clamp(.95rem,4vw,1.25rem);direction:rtl;line-height:1.8;word-break:keep-all;overflow-wrap:normal;white-space:normal}
+.ob.ar-opt{position:relative;justify-content:center;align-items:center;text-align:center;padding:22px 8px 12px;min-height:72px}
+.ob.ar-opt .ol{position:absolute;top:5px;left:6px}
+.ob.ar-opt .ot.ar{text-align:center;width:100%;font-weight:700;padding-top:4px}
+.fb{text-align:center;margin-top:14px;animation:fi .3s}
+.fbm{font-size:.88rem;font-weight:700;color:#5d3a1a;margin-bottom:10px}
+.rb{background:#fff;border-radius:22px;padding:26px 18px;text-align:center;box-shadow:0 6px 28px rgba(93,58,26,.12);border:2px solid #e8d5b0;animation:fi .4s}
+.re{font-size:3.2rem;margin-bottom:6px}
+.rl{font-size:.9rem;color:#8b5e3c;font-style:italic;margin-bottom:4px}
+.rs{font-size:2.8rem;font-weight:800;color:#5d3a1a}
+.rp{font-size:1rem;color:#a07850;margin-bottom:4px}
+.rc{font-size:.78rem;color:#5d3a1a;font-style:italic;margin-bottom:16px}
+.rvl{text-align:left;max-height:280px;overflow-y:auto;margin-bottom:16px;display:flex;flex-direction:column;gap:4px}
+.rvi{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:7px;font-size:.72rem;flex-wrap:wrap}
+.rvi.ok{background:#e8f5e9}.rvi.bad{background:#fdecea}
+.rm{font-weight:800;flex-shrink:0}.rm.ok{color:#2e7d32}.rm.bad{color:#c62828}
+.brow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.bp{padding:13px 24px;border-radius:14px;font-size:1rem;font-weight:800;background:#5d3a1a;color:#fdf6ed;transition:all .2s}
+.bp:hover{background:#7a4e2a}
+.bp.er{background:#b5451b}.bp.er:hover{background:#d4531f}
+.bs{padding:13px 24px;border-radius:14px;font-size:1rem;font-weight:800;background:#f5e6c8;color:#5d3a1a;transition:all .2s}
+.bs:hover{background:#e8d5b0}
+.sv{margin-top:16px;padding:10px 14px;background:#fff;border:2px solid #e8d5b0;border-radius:12px;font-size:.72rem;color:#8b5e3c}
+.sv b{color:#5d3a1a}
+
+.writebox{background:#fff;border:2px solid #e8d5b0;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(93,58,26,.05)}
+.winput{width:100%;padding:17px 18px;border:2px solid #c8a882;border-radius:14px;background:#fff;color:#3e2010;font-size:1.22rem;font-weight:700;text-align:center;outline:none}
+.winput:focus{border-color:#5d3a1a;box-shadow:0 0 0 3px rgba(93,58,26,.12)}
+.winput.ar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:1.85rem;direction:rtl}
+.whint{font-size:.82rem;color:#a07850;text-align:center;margin:10px 0 14px}
+.puzzle{background:#fff;border:2px solid #e8d5b0;border-radius:18px;padding:18px;box-shadow:0 2px 8px rgba(93,58,26,.05)}
+.pz-answer{min-height:78px;border:3px dashed #c8a882;border-radius:16px;background:#faf3e6;padding:12px;display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.pz-answer.empty{color:#a07850;font-size:.95rem;font-style:italic;font-weight:700}
+.pz-joined{min-height:52px;padding:10px 16px;border-radius:14px;background:#faf3e6;color:#3e2010;font-weight:900;font-size:1.45rem;display:inline-flex;align-items:center;justify-content:center;word-break:break-word}
+.pz-joined.ar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:2.8rem;direction:rtl;unicode-bidi:isolate;letter-spacing:0;line-height:1.35}
+.letter.back{background:#fff;color:#5d3a1a;border-style:dashed}
+.pz-letters{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.letter{min-width:52px;min-height:52px;padding:10px 14px;border-radius:14px;background:#f5e6c8;color:#5d3a1a;border:2px solid #c8a882;font-weight:900;font-size:1.28rem;box-shadow:0 2px 5px rgba(93,58,26,.06)}
+.letter.ar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:2rem;line-height:1}
+.letter.used{opacity:.18;pointer-events:none}
+.letter:disabled{opacity:.45;cursor:default;transform:none}
+.pz-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.mode-note{font-size:.68rem;color:#a07850;margin-top:7px;text-align:center}
+
+.plpair{display:inline-flex;align-items:center;justify-content:center;gap:.14em;direction:rtl;unicode-bidi:isolate}
+.plsep{display:inline-flex;align-items:center;justify-content:center;width:1.35em;height:1.35em;border-radius:999px;background:#b5451b;color:#fff;font-weight:900;font-size:.9em;line-height:1;border:2px solid #7a2f12;box-shadow:0 1px 4px rgba(93,58,26,.18);margin:0 .22em;font-family:'Traditional Arabic','Times New Roman',serif}
+.plural-note{display:inline-block;margin-top:8px;padding:8px 11px;border-radius:12px;background:#f5e6c8;border:1px solid #e8d5b0;color:#5d3a1a;font-size:.78rem;font-weight:700}
+.plural-note .plpair{font-family:'Traditional Arabic','Times New Roman',serif;font-size:1.15rem}
+.verbpair{display:inline-flex;align-items:center;justify-content:center;gap:.18em;direction:rtl;unicode-bidi:isolate}
+.verbsep{color:#b5451b;font-weight:900;margin:0 .18em;font-family:'Traditional Arabic','Times New Roman',serif}
+
+
+.search-float{position:fixed;right:12px;bottom:12px;z-index:60;width:min(340px,calc(100vw - 24px));font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+.sfbox{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #e8d5b0;border-radius:18px;padding:8px 9px;box-shadow:0 8px 28px rgba(93,58,26,.18)}
+.sficon{width:28px;height:28px;border-radius:50%;background:#5d3a1a;color:#fdf6ed;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.sfinput{flex:1;min-width:0;border:none;outline:none;background:transparent;color:#3e2010;font-size:.86rem;font-weight:700;padding:8px 2px}
+.sfinput::placeholder{color:#a07850;font-weight:600}
+.sfclear{width:28px;height:28px;border-radius:50%;background:#f5e6c8;color:#5d3a1a;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sfres{position:absolute;right:0;bottom:58px;width:100%;max-height:320px;overflow-y:auto;background:#fff;border:2px solid #e8d5b0;border-radius:16px;box-shadow:0 8px 28px rgba(93,58,26,.18);padding:6px;animation:fi .18s}
+.sfitem{display:block;width:100%;text-align:left;background:#fff;border-radius:12px;padding:9px 10px;color:#3e2010;border:1px solid transparent;transition:all .15s}
+.sfitem:hover{background:#faf3e6;border-color:#c8a882}
+.sfword{display:flex;gap:6px;align-items:center;justify-content:space-between;margin-bottom:3px}
+.sf-ar{font-family:'Traditional Arabic','Times New Roman',serif;font-size:1.08rem;font-weight:800;color:#3e2010;direction:rtl;text-align:right}
+.sf-fr{font-size:.76rem;font-weight:800;color:#5d3a1a}
+.sfmeta{font-size:.65rem;color:#a07850;line-height:1.35}
+.sfempty{padding:10px;text-align:center;font-size:.72rem;color:#a07850}
+.card.found{border-color:#e65100;box-shadow:0 0 0 4px rgba(230,81,0,.12),0 6px 20px rgba(93,58,26,.16);animation:sfGlow 1.2s ease-in-out 2}
+@keyframes sfGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+@media(max-width:520px){#app{padding-bottom:122px}.search-float{left:10px;right:10px;bottom:10px;width:auto}.sfres{max-height:260px}.sfword{display:block}.sf-ar{text-align:left}}
+
+@media(max-width:380px){.letter{min-width:48px;min-height:48px;padding:9px 12px;font-size:1.18rem}.letter.ar{font-size:1.85rem}.pz-joined.ar{font-size:2.45rem}.puzzle{padding:15px}}
+@media(min-width:480px){.grid{grid-template-columns:1fr 1fr}.qar{font-size:2.8rem}}
+.pwa-bar{position:fixed;top:0;left:0;right:0;z-index:200;background:#5d3a1a;color:#fdf6ed;padding:10px 12px;display:none;align-items:center;gap:10px;box-shadow:0 3px 16px rgba(93,58,26,.35);animation:slideDown .3s ease}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.pwa-bar.show{display:flex}
+.pwa-ic{width:40px;height:40px;border-radius:10px;background:#fdf6ed;color:#5d3a1a;font-family:'Traditional Arabic',serif;font-size:1.6rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900}
+.pwa-txt{flex:1;min-width:0;line-height:1.3}
+.pwa-t1{font-size:.82rem;font-weight:800}
+.pwa-t2{font-size:.65rem;opacity:.75}
+.pwa-go{padding:7px 13px;border-radius:9px;background:#fdf6ed;color:#5d3a1a;font-weight:900;font-size:.75rem;flex-shrink:0}
+.pwa-x{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);color:#fdf6ed;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div id="pwa-bar" class="pwa-bar">
+  <div class="pwa-ic">ب</div>
+  <div class="pwa-txt">
+    <div class="pwa-t1">Installer l'application</div>
+    <div class="pwa-t2" id="pwa-sub">Accès hors-ligne · Plein écran</div>
+  </div>
+  <button class="pwa-go" id="pwa-btn" onclick="installPWA()">Installer</button>
+  <button class="pwa-x" onclick="dismissPWA()">×</button>
+</div>
+<div id="app"></div>
+<div id="searchFloat" class="search-float"></div>
+<script>
+// ═══════════════════════════════════════════════════════
+//  DONNÉES RECLASSÉES — LIVRES 1.1 + 1.2 + ANNEXES
+//  Mise à jour: mots validés ajoutés; nombres placés dans Annexes > Nombres
+// ═══════════════════════════════════════════════════════
+var D={
+  "Tome 1": {
+    "Unité 1 – التَّحِيَّةُ وَالتَّعَارُفُ | Salutations & présentation": [
+      {
+        "a": "بِسْمِ اللَّهِ",
+        "f": "Au nom d'Allah"
+      },
+      {
+        "a": "السَّلَامُ عَلَيْكُمْ",
+        "f": "La paix sur vous"
+      },
+      {
+        "a": "وَعَلَيْكُمُ السَّلَامُ",
+        "f": "Et sur vous la paix"
+      },
+      {
+        "a": "أَهْلاً وَسَهْلاً",
+        "f": "Bienvenue"
+      },
+      {
+        "a": "سَلَامٌ",
+        "f": "Salut"
+      },
+      {
+        "a": "اِسْمٌ",
+        "f": "Nom"
+      },
+      {
+        "a": "مَا اسْمُكَ؟",
+        "f": "Quel est ton nom ?"
+      },
+      {
+        "a": "جِنْسِيَّةٌ",
+        "f": "Nationalité"
+      },
+      {
+        "a": "طَالِبٌ",
+        "f": "Étudiant"
+      },
+      {
+        "a": "مُدَرِّسٌ",
+        "f": "Enseignant"
+      },
+      {
+        "a": "مُهَنْدِسٌ",
+        "f": "Ingénieur"
+      },
+      {
+        "a": "طَبِيبٌ",
+        "f": "Médecin"
+      },
+      {
+        "a": "هَذَا",
+        "f": "Ceci (masc.)"
+      },
+      {
+        "a": "هَذِهِ",
+        "f": "Celle-ci (fém.)"
+      },
+      {
+        "a": "نَعَمْ",
+        "f": "Oui"
+      },
+      {
+        "a": "لَا",
+        "f": "Non"
+      },
+      {
+        "a": "هَلْ",
+        "f": "Est-ce que ?"
+      },
+      {
+        "a": "أَيْنَ",
+        "f": "Où ?"
+      },
+      {
+        "a": "مِنْ أَيْنَ",
+        "f": "D'où ?"
+      },
+      {
+        "a": "أَنَا",
+        "f": "Je / Moi"
+      },
+      {
+        "a": "أَنْتَ",
+        "f": "Tu (masc.)"
+      },
+      {
+        "a": "أَنْتِ",
+        "f": "Tu (fém.)"
+      },
+      {
+        "a": "هُوَ",
+        "f": "Il"
+      },
+      {
+        "a": "هِيَ",
+        "f": "Elle"
+      },
+      {
+        "a": "أَخٌ",
+        "f": "Frère"
+      },
+      {
+        "a": "أُخْتٌ",
+        "f": "Sœur"
+      },
+      {
+        "a": "بِخَيْرٍ",
+        "f": "Bien"
+      },
+      {
+        "a": "حَمْدٌ",
+        "f": "Louange"
+      },
+      {
+        "a": "صَدِيقٌ",
+        "f": "Ami"
+      },
+      {
+        "a": "وَ",
+        "f": "Et"
+      },
+      {
+        "a": "فِي",
+        "f": "Dans"
+      },
+      {
+        "a": "مِنْ",
+        "f": "De / Depuis"
+      },
+      {
+        "a": "أَرْبَعَةٌ",
+        "f": "Quatre"
+      },
+      {
+        "a": "اِثْنَانِ",
+        "f": "Deux"
+      },
+      {
+        "a": "ثَلَاثَةٌ",
+        "f": "Trois"
+      },
+      {
+        "a": "خَمْسَةٌ",
+        "f": "Cinq"
+      },
+      {
+        "a": "صَدِيقَةٌ",
+        "f": "Amie"
+      },
+      {
+        "a": "طَالِبَةٌ",
+        "f": "Étudiante"
+      },
+      {
+        "a": "طَبِيبَةٌ",
+        "f": "Médecin femme"
+      },
+      {
+        "a": "كَيْفَ حَالُكَ؟",
+        "f": "Comment vas-tu ? masculin"
+      },
+      {
+        "a": "كَيْفَ حَالُكِ؟",
+        "f": "Comment vas-tu ? féminin"
+      },
+      {
+        "a": "لِـ",
+        "f": "À / pour"
+      },
+      {
+        "a": "كَ",
+        "f": "Ton / toi masculin suffixe"
+      },
+      {
+        "a": "كِ",
+        "f": "Ton / toi féminin suffixe"
+      },
+      {
+        "a": "ي",
+        "f": "Mon / moi suffixe"
+      },
+      {
+        "a": "مَا",
+        "f": "Quoi / que"
+      },
+      {
+        "a": "يَاءُ المُتَكَلِّمِ",
+        "f": "Suffixe “mon / ma”"
+      },
+      {
+        "a": "يَاءُ النِّسْبَةِ",
+        "f": "Yāʾ de relation"
+      },
+      {
+        "a": "يَاءُ المُخَاطَبَةِ",
+        "f": "Yāʾ du féminin adressé"
+      }
+    ],
+    "Unité 2 – الأُسْرَةُ | La famille": [
+      {
+        "a": "أُمٌّ",
+        "f": "Mère"
+      },
+      {
+        "a": "أَبٌ",
+        "f": "Père"
+      },
+      {
+        "a": "وَالِدٌ",
+        "f": "Père (formel)"
+      },
+      {
+        "a": "وَالِدَةٌ",
+        "f": "Mère (formel)"
+      },
+      {
+        "a": "أُسْرَةٌ",
+        "f": "Famille"
+      },
+      {
+        "a": "اِبْنٌ",
+        "f": "Fils"
+      },
+      {
+        "a": "بِنْتٌ",
+        "f": "Fille"
+      },
+      {
+        "a": "وَلَدٌ",
+        "f": "Enfant / Garçon"
+      },
+      {
+        "a": "أَكْبَرُ",
+        "f": "Plus grand"
+      },
+      {
+        "a": "أَصْغَرُ",
+        "f": "Plus petit"
+      },
+      {
+        "a": "جَدٌّ",
+        "f": "Grand-père"
+      },
+      {
+        "a": "جَدَّةٌ",
+        "f": "Grand-mère"
+      },
+      {
+        "a": "عَمٌّ",
+        "f": "Oncle paternel"
+      },
+      {
+        "a": "عَمَّةٌ",
+        "f": "Tante paternelle"
+      },
+      {
+        "a": "خَالٌ",
+        "f": "Oncle maternel"
+      },
+      {
+        "a": "خَالَةٌ",
+        "f": "Tante maternelle"
+      },
+      {
+        "a": "شَجَرَةٌ",
+        "f": "Arbre"
+      },
+      {
+        "a": "صُورَةٌ",
+        "f": "Image / Photo"
+      },
+      {
+        "a": "غُرْفَةٌ",
+        "f": "Chambre"
+      },
+      {
+        "a": "مِعْطَفٌ",
+        "f": "Manteau"
+      },
+      {
+        "a": "مَنْ؟",
+        "f": "Qui ?"
+      },
+      {
+        "a": "نَحْنُ",
+        "f": "Nous"
+      },
+      {
+        "a": "هُمْ",
+        "f": "Eux / Ils"
+      },
+      {
+        "a": "يَا",
+        "f": "Ô / particule d’appel"
+      },
+      {
+        "a": "هُ",
+        "f": "Son / le masculin suffixe"
+      },
+      {
+        "a": "هَا",
+        "f": "Son / la féminin suffixe"
+      },
+      {
+        "a": "هُوَ يُصَلِّي",
+        "f": "Il prie"
+      },
+      {
+        "a": "وَالِدَانِ",
+        "f": "Les deux parents"
+      }
+    ],
+    "Unité 3 – السَّكَنُ | Le logement": [
+      {
+        "a": "بَيْتٌ",
+        "f": "Maison"
+      },
+      {
+        "a": "شَقَّةٌ",
+        "f": "Appartement"
+      },
+      {
+        "a": "بَابٌ",
+        "f": "Porte"
+      },
+      {
+        "a": "نَافِذَةٌ",
+        "f": "Fenêtre"
+      },
+      {
+        "a": "غُرْفَةُ النَّوْمِ",
+        "f": "Chambre à coucher"
+      },
+      {
+        "a": "غُرْفَةُ الجُلُوسِ",
+        "f": "Salon"
+      },
+      {
+        "a": "مَطْبَخٌ",
+        "f": "Cuisine"
+      },
+      {
+        "a": "أَثَاثٌ",
+        "f": "Meubles"
+      },
+      {
+        "a": "أَرِيكَةٌ",
+        "f": "Fauteuil / Canapé"
+      },
+      {
+        "a": "سَرِيرٌ",
+        "f": "Lit"
+      },
+      {
+        "a": "سَجَّادَةٌ",
+        "f": "Tapis"
+      },
+      {
+        "a": "سِتَارَةٌ",
+        "f": "Rideau"
+      },
+      {
+        "a": "ثَلَّاجَةٌ",
+        "f": "Réfrigérateur"
+      },
+      {
+        "a": "فُرْنٌ",
+        "f": "Four"
+      },
+      {
+        "a": "سَخَّانٌ",
+        "f": "Chauffe-eau"
+      },
+      {
+        "a": "مِصْبَاحٌ",
+        "f": "Lampe"
+      },
+      {
+        "a": "مِرْآةٌ",
+        "f": "Miroir"
+      },
+      {
+        "a": "بَائِعٌ",
+        "f": "Vendeur"
+      },
+      {
+        "a": "تَفَضَّلْ",
+        "f": "Je t'en prie"
+      },
+      {
+        "a": "جَمِيلٌ",
+        "f": "Beau"
+      },
+      {
+        "a": "حَيٌّ",
+        "f": "Quartier"
+      },
+      {
+        "a": "شَارِعٌ",
+        "f": "Rue"
+      },
+      {
+        "a": "عِمَارَةٌ",
+        "f": "Immeuble"
+      },
+      {
+        "a": "دَخَلَ",
+        "f": "Entrer"
+      },
+      {
+        "a": "خَرَجَ",
+        "f": "Sortir"
+      },
+      {
+        "a": "دَوْرٌ",
+        "f": "Étage"
+      },
+      {
+        "a": "رَقْمٌ",
+        "f": "Numéro"
+      },
+      {
+        "a": "سَكَنَ",
+        "f": "Habiter"
+      },
+      {
+        "a": "شُكْراً",
+        "f": "Merci"
+      },
+      {
+        "a": "مِنْ فَضْلِكَ",
+        "f": "S'il te plaît"
+      },
+      {
+        "a": "كَمْ؟",
+        "f": "Combien ?"
+      },
+      {
+        "a": "آخَرُ",
+        "f": "Autre"
+      },
+      {
+        "a": "أَرَادَ",
+        "f": "Vouloir"
+      },
+      {
+        "a": "أَمَامَ",
+        "f": "Devant"
+      },
+      {
+        "a": "وَرَاءَ",
+        "f": "Derrière"
+      },
+      {
+        "a": "فَوْقَ",
+        "f": "Au-dessus"
+      },
+      {
+        "a": "تَحْتَ",
+        "f": "En-dessous"
+      },
+      {
+        "a": "يَمِينٌ",
+        "f": "Droite"
+      },
+      {
+        "a": "يَسَارٌ",
+        "f": "Gauche"
+      },
+      {
+        "a": "بَيْنَ",
+        "f": "Entre"
+      },
+      {
+        "a": "حَدِيقَةٌ",
+        "f": "Jardin"
+      },
+      {
+        "a": "مَوْقِفٌ",
+        "f": "Parking"
+      },
+      {
+        "a": "مِصْعَدٌ",
+        "f": "Ascenseur"
+      },
+      {
+        "a": "دَرَجٌ",
+        "f": "Escalier"
+      },
+      {
+        "a": "أَيُّ خِدْمَةٍ",
+        "f": "Quel service ?"
+      },
+      {
+        "a": "بَعْضٌ",
+        "f": "Quelques / certains"
+      },
+      {
+        "a": "لَدَى",
+        "f": "Chez / auprès de"
+      },
+      {
+        "a": "مُؤَجِّرٌ",
+        "f": "Loueur / propriétaire"
+      },
+      {
+        "a": "مُسْتَأْجِرٌ",
+        "f": "Locataire"
+      },
+      {
+        "a": "مُشَاهَدَةٌ",
+        "f": "Visionnage / spectacle"
+      },
+      {
+        "a": "مُشْكِلَتِي",
+        "f": "Mon problème"
+      },
+      {
+        "a": "فِي أَيِّ؟",
+        "f": "Dans quel ?"
+      },
+      {
+        "a": "لَا جَوَابِيَّةٌ",
+        "f": "Non de réponse"
+      },
+      {
+        "a": "مَا نَافِيَةٌ",
+        "f": "Ne… pas / particule de négation"
+      },
+      {
+        "a": "الطَّابَقُ الأَوَّلُ",
+        "f": "Premier étage"
+      },
+      {
+        "a": "الطَّابَقُ الثَّانِي",
+        "f": "Deuxième étage"
+      },
+      {
+        "a": "مُشْتَرِي",
+        "f": "Acheteur / client"
+      },
+      {
+        "a": "لَا الجَوَابِيَّةُ",
+        "f": "Lā de réponse"
+      },
+      {
+        "a": "مَا النَّافِيَةُ",
+        "f": "Mā négative"
+      }
+    ],
+    "Unité 4 – الحَيَاةُ اليَوْمِيَّةُ | La vie quotidienne": [
+      {
+        "a": "يَوْمٌ",
+        "f": "Jour"
+      },
+      {
+        "a": "صَبَاحٌ",
+        "f": "Matin"
+      },
+      {
+        "a": "ظُهْرٌ",
+        "f": "Midi"
+      },
+      {
+        "a": "عَصْرٌ",
+        "f": "Après-midi"
+      },
+      {
+        "a": "مَسَاءٌ",
+        "f": "Soir"
+      },
+      {
+        "a": "لَيْلٌ",
+        "f": "Nuit"
+      },
+      {
+        "a": "سَاعَةٌ",
+        "f": "Heure / Horloge"
+      },
+      {
+        "a": "اِسْتَيْقَظَ",
+        "f": "Se réveiller"
+      },
+      {
+        "a": "نَامَ",
+        "f": "Dormir"
+      },
+      {
+        "a": "ذَهَبَ",
+        "f": "Aller"
+      },
+      {
+        "a": "رَجَعَ",
+        "f": "Rentrer"
+      },
+      {
+        "a": "غَسَلَ",
+        "f": "Laver"
+      },
+      {
+        "a": "فَعَلَ",
+        "f": "Faire"
+      },
+      {
+        "a": "شَاهَدَ",
+        "f": "Regarder"
+      },
+      {
+        "a": "كَنَسَ",
+        "f": "Balayer"
+      },
+      {
+        "a": "كَوَى",
+        "f": "Repasser"
+      },
+      {
+        "a": "سَيَّارَةٌ",
+        "f": "Voiture"
+      },
+      {
+        "a": "حَافِلَةٌ",
+        "f": "Bus"
+      },
+      {
+        "a": "تِلْفَازٌ",
+        "f": "Télévision"
+      },
+      {
+        "a": "صَحِيفَةٌ",
+        "f": "Journal"
+      },
+      {
+        "a": "كِتَابٌ",
+        "f": "Livre"
+      },
+      {
+        "a": "مَلَابِسُ",
+        "f": "Vêtements"
+      },
+      {
+        "a": "أَطْبَاقٌ",
+        "f": "Vaisselle"
+      },
+      {
+        "a": "كَبِيرٌ",
+        "f": "Grand"
+      },
+      {
+        "a": "صَغِيرٌ",
+        "f": "Petit"
+      },
+      {
+        "a": "مُبَكِّراً",
+        "f": "Tôt"
+      },
+      {
+        "a": "مُتَأَخِّراً",
+        "f": "Tard"
+      },
+      {
+        "a": "مَتَى",
+        "f": "Quand ?"
+      },
+      {
+        "a": "أَيْضاً",
+        "f": "Aussi"
+      },
+      {
+        "a": "بَعْدَ",
+        "f": "Après"
+      },
+      {
+        "a": "قَبْلَ",
+        "f": "Avant"
+      },
+      {
+        "a": "ثُمَّ",
+        "f": "Puis / Ensuite"
+      },
+      {
+        "a": "السَّبْتُ",
+        "f": "Samedi"
+      },
+      {
+        "a": "الْأَحَدُ",
+        "f": "Dimanche"
+      },
+      {
+        "a": "الْاِثْنَيْنِ",
+        "f": "Lundi"
+      },
+      {
+        "a": "الثُّلَاثَاءُ",
+        "f": "Mardi"
+      },
+      {
+        "a": "الْأَرْبِعَاءُ",
+        "f": "Mercredi"
+      },
+      {
+        "a": "الْخَمِيسُ",
+        "f": "Jeudi"
+      },
+      {
+        "a": "الْجُمُعَةُ",
+        "f": "Vendredi"
+      },
+      {
+        "a": "لَا نَاهِيَةٌ",
+        "f": "Ne… pas / interdiction"
+      },
+      {
+        "a": "لَا النَّاهِيَةُ",
+        "f": "Lā d’interdiction"
+      }
+    ],
+    "Unité 5 – الطَّعَامُ وَالشَّرَابُ | Nourriture & boissons": [
+      {
+        "a": "طَعَامٌ",
+        "f": "Nourriture"
+      },
+      {
+        "a": "وَجْبَةٌ",
+        "f": "Repas"
+      },
+      {
+        "a": "فُطُورٌ",
+        "f": "Petit-déjeuner"
+      },
+      {
+        "a": "غَدَاءٌ",
+        "f": "Déjeuner"
+      },
+      {
+        "a": "عَشَاءٌ",
+        "f": "Dîner"
+      },
+      {
+        "a": "أَكَلَ",
+        "f": "Manger"
+      },
+      {
+        "a": "شَرِبَ",
+        "f": "Boire"
+      },
+      {
+        "a": "جَلَسَ",
+        "f": "S'asseoir"
+      },
+      {
+        "a": "طَلَبَ",
+        "f": "Commander"
+      },
+      {
+        "a": "فَضَّلَ",
+        "f": "Préférer"
+      },
+      {
+        "a": "خُبْزٌ",
+        "f": "Pain"
+      },
+      {
+        "a": "أُرُزٌّ",
+        "f": "Riz"
+      },
+      {
+        "a": "لَحْمٌ",
+        "f": "Viande"
+      },
+      {
+        "a": "دَجَاجَةٌ",
+        "f": "Poulet"
+      },
+      {
+        "a": "سَمَكَةٌ",
+        "f": "Poisson"
+      },
+      {
+        "a": "بَيْضَةٌ",
+        "f": "Œuf"
+      },
+      {
+        "a": "سَلَطَةٌ",
+        "f": "Salade"
+      },
+      {
+        "a": "تَمْرَةٌ",
+        "f": "Datte"
+      },
+      {
+        "a": "فَاكِهَةٌ",
+        "f": "Fruit"
+      },
+      {
+        "a": "عِنَبٌ",
+        "f": "Raisin"
+      },
+      {
+        "a": "حَلِيبٌ",
+        "f": "Lait"
+      },
+      {
+        "a": "مَاءٌ",
+        "f": "Eau"
+      },
+      {
+        "a": "شَايٌ",
+        "f": "Thé"
+      },
+      {
+        "a": "قَهْوَةٌ",
+        "f": "Café"
+      },
+      {
+        "a": "مَائِدَةٌ",
+        "f": "Table servie"
+      },
+      {
+        "a": "مَطْعَمٌ",
+        "f": "Restaurant"
+      },
+      {
+        "a": "ضَيْفٌ",
+        "f": "Invité"
+      },
+      {
+        "a": "زَوْجٌ",
+        "f": "Époux"
+      },
+      {
+        "a": "زَوْجَةٌ",
+        "f": "Épouse"
+      },
+      {
+        "a": "جَوْعَانُ",
+        "f": "Affamé"
+      },
+      {
+        "a": "عَطْشَانُ",
+        "f": "Assoiffé"
+      },
+      {
+        "a": "سَمِينٌ",
+        "f": "Gros"
+      },
+      {
+        "a": "نَحِيفٌ",
+        "f": "Maigre"
+      },
+      {
+        "a": "كَثِيرٌ",
+        "f": "Beaucoup"
+      },
+      {
+        "a": "قَلِيلٌ",
+        "f": "Peu"
+      },
+      {
+        "a": "جِدّاً",
+        "f": "Très"
+      },
+      {
+        "a": "عَلَى",
+        "f": "Sur"
+      },
+      {
+        "a": "عَفْواً",
+        "f": "Pardon"
+      },
+      {
+        "a": "لِمَاذَا",
+        "f": "Pourquoi ?"
+      },
+      {
+        "a": "مَاذَا",
+        "f": "Quoi ?"
+      },
+      {
+        "a": "أُولَى",
+        "f": "Première"
+      },
+      {
+        "a": "ثَانِيَةٌ",
+        "f": "Deuxième"
+      },
+      {
+        "a": "ثَالِثَةٌ",
+        "f": "Troisième"
+      },
+      {
+        "a": "رَابِعَةٌ",
+        "f": "Quatrième"
+      },
+      {
+        "a": "خَامِسَةٌ",
+        "f": "Cinquième"
+      },
+      {
+        "a": "سِتُّونَ",
+        "f": "Soixante"
+      },
+      {
+        "a": "مِئَةٌ",
+        "f": "Cent"
+      },
+      {
+        "a": "وَاحِدَةٌ",
+        "f": "Une"
+      },
+      {
+        "a": "كِيلٌ",
+        "f": "Kilo"
+      },
+      {
+        "a": "مُسَافِرَةٌ",
+        "f": "Voyageuse"
+      },
+      {
+        "a": "مُضِيفَةٌ",
+        "f": "Hôtesse"
+      },
+      {
+        "a": "تَمْرٌ",
+        "f": "Dattes"
+      },
+      {
+        "a": "دَجَاجٌ",
+        "f": "Poulet"
+      },
+      {
+        "a": "نَا",
+        "f": "Notre / suffixe “nous”"
+      }
+    ],
+    "Unité 6 – الصَّلَاةُ | La prière": [
+      {
+        "a": "صَلَاةٌ",
+        "f": "Prière"
+      },
+      {
+        "a": "تَوَضَّأَ",
+        "f": "Faire les ablutions"
+      },
+      {
+        "a": "حَمَّامٌ",
+        "f": "Salle de bains"
+      },
+      {
+        "a": "صَلَّى",
+        "f": "Prier"
+      },
+      {
+        "a": "مَسْجِدٌ",
+        "f": "Mosquée"
+      },
+      {
+        "a": "فَجْرٌ",
+        "f": "Aube"
+      },
+      {
+        "a": "مَغْرِبٌ",
+        "f": "Coucher du soleil"
+      },
+      {
+        "a": "مُصَلًّى",
+        "f": "Salle de prière"
+      },
+      {
+        "a": "قَرَأَ",
+        "f": "Lire"
+      },
+      {
+        "a": "رَسُولٌ",
+        "f": "Messager"
+      },
+      {
+        "a": "سَلَّمَ",
+        "f": "Saluer"
+      },
+      {
+        "a": "شَاءَ",
+        "f": "Vouloir (divin)"
+      },
+      {
+        "a": "هَيَّا بِنَا",
+        "f": "Allons-y"
+      },
+      {
+        "a": "سَادِسٌ",
+        "f": "Sixième"
+      },
+      {
+        "a": "سَابِعٌ",
+        "f": "Septième"
+      },
+      {
+        "a": "ثَامِنٌ",
+        "f": "Huitième"
+      },
+      {
+        "a": "تَاسِعٌ",
+        "f": "Neuvième"
+      },
+      {
+        "a": "عَاشِرٌ",
+        "f": "Dixième"
+      },
+      {
+        "a": "صَلَوَاتٌ",
+        "f": "Prières"
+      },
+      {
+        "a": "فِكْرَةٌ طَيِّبَةٌ",
+        "f": "Bonne idée"
+      },
+      {
+        "a": "الظُّهْرُ",
+        "f": "Prière de midi"
+      },
+      {
+        "a": "العِشَاءُ",
+        "f": "Prière du soir"
+      },
+      {
+        "a": "العَصْرُ",
+        "f": "Prière de l’après-midi"
+      },
+      {
+        "a": "طَيِّبَةٌ",
+        "f": "Bonne / agréable"
+      },
+      {
+        "a": "أَلْـ التَّعْرِيفِ",
+        "f": "Article défini “al-”"
+      },
+      {
+        "a": "مِنْبَرٌ",
+        "f": "Minbar / chaire"
+      },
+      {
+        "a": "السَّاعِي",
+        "f": "Celui qui marche / celui qui fait le saʿy"
+      }
+    ],
+    "Unité 7 – الدِّرَاسَةُ | Les études": [
+      {
+        "a": "مَدْرَسَةٌ",
+        "f": "École"
+      },
+      {
+        "a": "مُعَلِّمَةٌ",
+        "f": "Enseignante"
+      },
+      {
+        "a": "نَظَّارَةٌ",
+        "f": "Lunettes"
+      },
+      {
+        "a": "جَامِعَةٌ",
+        "f": "Université"
+      },
+      {
+        "a": "كُلِّيَّةٌ",
+        "f": "Faculté"
+      },
+      {
+        "a": "مَكْتَبَةٌ",
+        "f": "Bibliothèque"
+      },
+      {
+        "a": "مُخْتَبَرٌ",
+        "f": "Laboratoire"
+      },
+      {
+        "a": "صَفٌّ",
+        "f": "Classe"
+      },
+      {
+        "a": "حِصَّةٌ",
+        "f": "Séance / Cours"
+      },
+      {
+        "a": "مَادَّةٌ",
+        "f": "Matière"
+      },
+      {
+        "a": "دِرَاسَةٌ",
+        "f": "Études"
+      },
+      {
+        "a": "اِخْتِبَارٌ",
+        "f": "Examen"
+      },
+      {
+        "a": "جَدْوَلٌ دِرَاسِيٌّ",
+        "f": "Emploi du temps"
+      },
+      {
+        "a": "لُغَةٌ عَرَبِيَّةٌ",
+        "f": "Langue arabe"
+      },
+      {
+        "a": "رِيَاضِيَّاتٌ",
+        "f": "Mathématiques"
+      },
+      {
+        "a": "عُلُومٌ",
+        "f": "Sciences"
+      },
+      {
+        "a": "ثَقَافَةٌ إِسْلَامِيَّةٌ",
+        "f": "Culture islamique"
+      },
+      {
+        "a": "تَرْبِيَةٌ",
+        "f": "Éducation"
+      },
+      {
+        "a": "طِبٌّ",
+        "f": "Médecine"
+      },
+      {
+        "a": "حَاسُوبٌ",
+        "f": "Ordinateur"
+      },
+      {
+        "a": "لَوْحَةٌ",
+        "f": "Tableau"
+      },
+      {
+        "a": "نَظَرَ",
+        "f": "Regarder"
+      },
+      {
+        "a": "دَرَسَ",
+        "f": "Étudier"
+      },
+      {
+        "a": "كَتَبَ",
+        "f": "Écrire"
+      },
+      {
+        "a": "بَدَأَ",
+        "f": "Commencer"
+      },
+      {
+        "a": "اِنْتَهَى",
+        "f": "Finir"
+      },
+      {
+        "a": "جَاءَ",
+        "f": "Venir"
+      },
+      {
+        "a": "كَانَ",
+        "f": "Être"
+      },
+      {
+        "a": "أُسْبُوعٌ",
+        "f": "Semaine"
+      },
+      {
+        "a": "شَهْرٌ",
+        "f": "Mois"
+      },
+      {
+        "a": "عَامٌ",
+        "f": "Année"
+      },
+      {
+        "a": "وَقْتٌ",
+        "f": "Temps"
+      },
+      {
+        "a": "الْآنَ",
+        "f": "Maintenant"
+      },
+      {
+        "a": "اِسْتِرَاحَةٌ",
+        "f": "Pause"
+      },
+      {
+        "a": "طَوِيلٌ",
+        "f": "Long"
+      },
+      {
+        "a": "رَمَضَانُ",
+        "f": "Ramadan"
+      },
+      {
+        "a": "يَوْمٌ دِرَاسِيٌّ",
+        "f": "Journée scolaire"
+      },
+      {
+        "a": "مَوَادُّ دِرَاسِيَّةٌ",
+        "f": "Matières scolaires"
+      },
+      {
+        "a": "سَاعَاتٌ",
+        "f": "Heures"
+      }
+    ],
+    "Unité 8 – العَمَلُ | Le travail & les métiers": [
+      {
+        "a": "عَمَلٌ",
+        "f": "Travail"
+      },
+      {
+        "a": "مِهْنَةٌ",
+        "f": "Métier"
+      },
+      {
+        "a": "طِفْلٌ",
+        "f": "Enfant"
+      },
+      {
+        "a": "أَحَبَّ",
+        "f": "Aimer"
+      },
+      {
+        "a": "دَرَّسَ",
+        "f": "Enseigner"
+      },
+      {
+        "a": "آلَةٌ",
+        "f": "Outil"
+      },
+      {
+        "a": "شَرِكَةٌ",
+        "f": "Entreprise"
+      },
+      {
+        "a": "صَيْدَلَةٌ",
+        "f": "Pharmacie"
+      },
+      {
+        "a": "صَيْدَلِيٌّ",
+        "f": "Pharmacien"
+      },
+      {
+        "a": "طَيَّارٌ",
+        "f": "Aviateur"
+      },
+      {
+        "a": "طَيَرَانٌ",
+        "f": "Aviation"
+      },
+      {
+        "a": "مَرْحَلَةٌ",
+        "f": "Étape / Niveau"
+      },
+      {
+        "a": "اِبْتِدَائِيَّةٌ",
+        "f": "Primaire"
+      },
+      {
+        "a": "مُتَوَسِّطَةٌ",
+        "f": "Collège"
+      },
+      {
+        "a": "ثَانَوِيَّةٌ",
+        "f": "Lycée"
+      },
+      {
+        "a": "مُسْتَشْفَى",
+        "f": "Hôpital"
+      },
+      {
+        "a": "مُمَرِّضٌ",
+        "f": "Infirmier"
+      },
+      {
+        "a": "تَمْرِيضٌ",
+        "f": "Infirmerie"
+      },
+      {
+        "a": "عِيَادَةٌ",
+        "f": "Clinique"
+      },
+      {
+        "a": "تَخَرَّجَ",
+        "f": "Être diplômé"
+      },
+      {
+        "a": "عَمِلَ",
+        "f": "Travailler"
+      },
+      {
+        "a": "سَاعَةٌ آلَةٌ",
+        "f": "Montre / horloge"
+      },
+      {
+        "a": "صَيْدَلِيَّةٌ",
+        "f": "Pharmacie"
+      },
+      {
+        "a": "طَيَّارُونَ",
+        "f": "Pilotes"
+      },
+      {
+        "a": "مُمَرِّضَةٌ",
+        "f": "Infirmière"
+      }
+    ]
+  },
+  "Tome 2": {
+    "Unité 9 – التَّسَوُّقُ | Les achats & le marché": [
+      {
+        "a": "ثَوْبٌ",
+        "f": "Vêtement"
+      },
+      {
+        "a": "قَمِيصٌ",
+        "f": "Chemise"
+      },
+      {
+        "a": "أَبْيَضُ",
+        "f": "Blanc"
+      },
+      {
+        "a": "أَسْوَدُ",
+        "f": "Noir"
+      },
+      {
+        "a": "أَحْمَرُ",
+        "f": "Rouge"
+      },
+      {
+        "a": "أَخْضَرُ",
+        "f": "Vert"
+      },
+      {
+        "a": "أَزْرَقُ",
+        "f": "Bleu"
+      },
+      {
+        "a": "أَصْفَرُ",
+        "f": "Jaune"
+      },
+      {
+        "a": "اِشْتَرَى",
+        "f": "Acheter"
+      },
+      {
+        "a": "بِكَمْ",
+        "f": "À combien ?"
+      },
+      {
+        "a": "بَصَلٌ",
+        "f": "Oignon"
+      },
+      {
+        "a": "بَيْضَةٌ",
+        "f": "Œuf"
+      },
+      {
+        "a": "بُنٌّ",
+        "f": "Café moulu"
+      },
+      {
+        "a": "خِيَارٌ",
+        "f": "Concombre"
+      },
+      {
+        "a": "دَفْتَرٌ",
+        "f": "Cahier"
+      },
+      {
+        "a": "دِينَارٌ",
+        "f": "Dinar"
+      },
+      {
+        "a": "رِيَالٌ",
+        "f": "Riyal"
+      },
+      {
+        "a": "يُورُو",
+        "f": "Euro"
+      },
+      {
+        "a": "سُكَّرٌ",
+        "f": "Sucre"
+      },
+      {
+        "a": "طَبَقٌ",
+        "f": "Plat / Plateau"
+      },
+      {
+        "a": "طَمَاطِمٌ",
+        "f": "Tomate"
+      },
+      {
+        "a": "عُلْبَةٌ",
+        "f": "Boîte"
+      },
+      {
+        "a": "مِلْحٌ",
+        "f": "Sel"
+      },
+      {
+        "a": "ثَمَانُونَ",
+        "f": "Quatre-vingt"
+      },
+      {
+        "a": "ثَلَاثُونَ",
+        "f": "Trente"
+      },
+      {
+        "a": "خَمْسُونَ",
+        "f": "Cinquante"
+      },
+      {
+        "a": "اِمْرَأَةٌ",
+        "f": "Femme"
+      },
+      {
+        "a": "مَرْحَبَا",
+        "f": "Bienvenue"
+      },
+      {
+        "a": "هُنَا",
+        "f": "Ici"
+      },
+      {
+        "a": "مُعْجَمٌ",
+        "f": "Dictionnaire"
+      },
+      {
+        "a": "قُمْصَانٌ",
+        "f": "Chemises"
+      },
+      {
+        "a": "كِتَابُ القِرَاءَةِ",
+        "f": "Livre de lecture"
+      },
+      {
+        "a": "كِتَابُ القَوَاعِدِ",
+        "f": "Livre de grammaire"
+      },
+      {
+        "a": "لَوْ سَمَحْتَ",
+        "f": "S’il te plaît / s’il vous plaît"
+      },
+      {
+        "a": "قِسْمٌ",
+        "f": "Rayon / section"
+      },
+      {
+        "a": "تَرَكَ",
+        "f": "Laisser / quitter"
+      },
+      {
+        "a": "تَكَلَّمَ",
+        "f": "Parler"
+      },
+      {
+        "a": "كِتَابُ قِرَاءَةٍ",
+        "f": "Livre de lecture"
+      },
+      {
+        "a": "كِتَابُ قَوَاعِدَ",
+        "f": "Livre de grammaire"
+      }
+    ],
+    "Unité 10 – الجَوُّ | La météo & les saisons": [
+      {
+        "a": "جَوٌّ",
+        "f": "Atmosphère"
+      },
+      {
+        "a": "بَرْقٌ",
+        "f": "Éclair"
+      },
+      {
+        "a": "غَيْمٌ",
+        "f": "Nuage"
+      },
+      {
+        "a": "رَعْدٌ",
+        "f": "Tonnerre"
+      },
+      {
+        "a": "رِيحٌ",
+        "f": "Vent"
+      },
+      {
+        "a": "مُشْمِسٌ",
+        "f": "Ensoleillé"
+      },
+      {
+        "a": "رَذَاذٌ",
+        "f": "Bruine"
+      },
+      {
+        "a": "مُقْمِرٌ",
+        "f": "Clair de lune"
+      },
+      {
+        "a": "صَقِيعٌ",
+        "f": "Gel"
+      },
+      {
+        "a": "فَيْضَانٌ",
+        "f": "Inondation"
+      },
+      {
+        "a": "طَلٌّ",
+        "f": "Rosée"
+      },
+      {
+        "a": "ضَبَابٌ",
+        "f": "Brouillard"
+      },
+      {
+        "a": "جَلِيدٌ",
+        "f": "Glace"
+      },
+      {
+        "a": "فَصْلٌ",
+        "f": "Saison"
+      },
+      {
+        "a": "رَبِيعٌ",
+        "f": "Printemps"
+      },
+      {
+        "a": "صَيْفٌ",
+        "f": "Été"
+      },
+      {
+        "a": "خَرِيفٌ",
+        "f": "Automne"
+      },
+      {
+        "a": "شِتَاءٌ",
+        "f": "Hiver"
+      },
+      {
+        "a": "الطَّقْسُ",
+        "f": "Le temps / la météo"
+      },
+      {
+        "a": "حَارٌّ",
+        "f": "Chaud"
+      },
+      {
+        "a": "حَرٌّ",
+        "f": "Chaleur"
+      },
+      {
+        "a": "خَارِجٌ",
+        "f": "Dehors / extérieur"
+      },
+      {
+        "a": "خَلْفَ",
+        "f": "Derrière"
+      },
+      {
+        "a": "خَيْمَةٌ",
+        "f": "Tente"
+      },
+      {
+        "a": "دَافِئٌ",
+        "f": "Doux / chaud"
+      },
+      {
+        "a": "دَرَجَةُ الحَرَارَةِ",
+        "f": "Température"
+      },
+      {
+        "a": "سَمَاءٌ",
+        "f": "Ciel"
+      },
+      {
+        "a": "سُوقٌ",
+        "f": "Marché"
+      },
+      {
+        "a": "شَاطِئٌ",
+        "f": "Plage"
+      },
+      {
+        "a": "شَمَالٌ",
+        "f": "Nord"
+      },
+      {
+        "a": "رِحْلَةٌ",
+        "f": "Voyage / sortie"
+      },
+      {
+        "a": "زَرْقَاءُ",
+        "f": "Bleue"
+      },
+      {
+        "a": "سَعِيداً",
+        "f": "Heureux"
+      },
+      {
+        "a": "سَنَةٌ",
+        "f": "Année"
+      },
+      {
+        "a": "سَنَوَاتٌ",
+        "f": "Années"
+      },
+      {
+        "a": "سَوْدَاءُ",
+        "f": "Noire"
+      },
+      {
+        "a": "شَرِكَاتٌ",
+        "f": "Entreprises"
+      },
+      {
+        "a": "صَفْرَاءُ",
+        "f": "Jaune féminin"
+      },
+      {
+        "a": "ضَوْضَاءُ",
+        "f": "Bruit"
+      },
+      {
+        "a": "هَادِئٌ",
+        "f": "Calme"
+      },
+      {
+        "a": "هُنَاكَ",
+        "f": "Là-bas"
+      },
+      {
+        "a": "هَوَاءٌ",
+        "f": "Air"
+      },
+      {
+        "a": "تَحْتَ الصِّفْرِ",
+        "f": "Sous zéro"
+      },
+      {
+        "a": "حَضَرَ",
+        "f": "Assister / être présent"
+      },
+      {
+        "a": "زَارَ",
+        "f": "Visiter"
+      }
+    ],
+    "Unité 11 – النَّاسُ وَالأَمَاكِنُ | Les gens & les lieux": [
+      {
+        "a": "وَاسِعٌ",
+        "f": "Vaste / Large"
+      },
+      {
+        "a": "سَرِيعٌ",
+        "f": "Rapide"
+      },
+      {
+        "a": "ضَيِّقٌ",
+        "f": "Étroit"
+      },
+      {
+        "a": "بَطِيءٌ",
+        "f": "Lent"
+      },
+      {
+        "a": "مُرْتَفِعٌ",
+        "f": "Élevé / Haut"
+      },
+      {
+        "a": "قَوِيٌّ",
+        "f": "Fort"
+      },
+      {
+        "a": "مُنْخَفِضٌ",
+        "f": "Bas"
+      },
+      {
+        "a": "نَظِيفٌ",
+        "f": "Propre"
+      },
+      {
+        "a": "ضَعِيفٌ",
+        "f": "Faible"
+      },
+      {
+        "a": "ثَقِيلٌ",
+        "f": "Lourd"
+      },
+      {
+        "a": "مُتَّسِخٌ",
+        "f": "Sale"
+      },
+      {
+        "a": "خَفِيفٌ",
+        "f": "Léger"
+      },
+      {
+        "a": "صَابُونٌ",
+        "f": "Savon"
+      },
+      {
+        "a": "شَيْءٌ",
+        "f": "Chose"
+      },
+      {
+        "a": "جَدِيدٌ",
+        "f": "Nouveau"
+      },
+      {
+        "a": "قَدِيمٌ",
+        "f": "Ancien"
+      },
+      {
+        "a": "شَخْصِيٌّ",
+        "f": "Personnel"
+      },
+      {
+        "a": "عَائِلَةٌ",
+        "f": "Famille"
+      },
+      {
+        "a": "مِيلَادٌ",
+        "f": "Naissance"
+      },
+      {
+        "a": "عُمْرٌ",
+        "f": "Âge"
+      },
+      {
+        "a": "تَارِيخٌ",
+        "f": "Date / Histoire"
+      },
+      {
+        "a": "جِنْسٌ",
+        "f": "Genre"
+      },
+      {
+        "a": "ذَكَرٌ",
+        "f": "Mâle / Homme"
+      },
+      {
+        "a": "أُنْثَى",
+        "f": "Femme / Femelle"
+      },
+      {
+        "a": "حَالَةٌ اجْتِمَاعِيَّةٌ",
+        "f": "État civil"
+      },
+      {
+        "a": "عُنْوَانٌ",
+        "f": "Adresse"
+      },
+      {
+        "a": "مَنْزِلٌ",
+        "f": "Maison"
+      },
+      {
+        "a": "لُغَةٌ",
+        "f": "Langue"
+      },
+      {
+        "a": "طُولٌ",
+        "f": "Taille"
+      },
+      {
+        "a": "دِينٌ",
+        "f": "Religion"
+      },
+      {
+        "a": "جَوَّالٌ",
+        "f": "Téléphone portable"
+      },
+      {
+        "a": "شَجَرَةُ الْعَائِلَةِ",
+        "f": "Arbre généalogique"
+      },
+      {
+        "a": "حَفِيدٌ",
+        "f": "Petit-fils"
+      },
+      {
+        "a": "رَجُلٌ",
+        "f": "Homme"
+      },
+      {
+        "a": "اِمْرَأَةٌ",
+        "f": "Femme"
+      },
+      {
+        "a": "مَكَانٌ",
+        "f": "Lieu / endroit"
+      },
+      {
+        "a": "شَخْصٌ",
+        "f": "Personne"
+      },
+      {
+        "a": "قَرْيَةٌ",
+        "f": "Village"
+      },
+      {
+        "a": "مَزْرَعَةٌ",
+        "f": "Ferme"
+      },
+      {
+        "a": "جَامِعَاتٌ",
+        "f": "Universités"
+      }
+    ],
+    "Unité 12 – الهِوَايَاتُ | Les loisirs": [
+      {
+        "a": "مَجَلَّةٌ",
+        "f": "Magazine"
+      },
+      {
+        "a": "كُرَةُ الْقَدَمِ",
+        "f": "Football"
+      },
+      {
+        "a": "أَحَادِيثُ",
+        "f": "Hadiths / paroles"
+      },
+      {
+        "a": "إِسْلَامِيَّةٌ",
+        "f": "Islamique"
+      },
+      {
+        "a": "آيَاتٌ",
+        "f": "Versets"
+      },
+      {
+        "a": "تَدْبِيرٌ مَنْزِلِيٌّ",
+        "f": "Économie domestique"
+      },
+      {
+        "a": "تِلْكَ",
+        "f": "Celle-là"
+      },
+      {
+        "a": "جَمْعُ الطَّوَابِعِ",
+        "f": "Collection de timbres"
+      },
+      {
+        "a": "جَمِيعٌ",
+        "f": "Tous"
+      },
+      {
+        "a": "جَنَاحٌ",
+        "f": "Aile / pavillon"
+      },
+      {
+        "a": "خَطُّ الرُّقْعَةِ",
+        "f": "Écriture ruqʿa"
+      },
+      {
+        "a": "الخَطُّ العَرَبِيُّ",
+        "f": "Calligraphie arabe"
+      },
+      {
+        "a": "خَطُّ النَّسْخِ",
+        "f": "Écriture naskh"
+      },
+      {
+        "a": "خِيَاطَةٌ",
+        "f": "Couture"
+      },
+      {
+        "a": "رِحْلَاتٌ",
+        "f": "Voyages / sorties"
+      },
+      {
+        "a": "رِيَاضَةٌ",
+        "f": "Sport"
+      },
+      {
+        "a": "مُرَاسَلَةٌ",
+        "f": "Correspondance"
+      },
+      {
+        "a": "مَعْرِضٌ",
+        "f": "Exposition"
+      },
+      {
+        "a": "مُفِيدٌ",
+        "f": "Utile"
+      },
+      {
+        "a": "هِوَايَةٌ",
+        "f": "Loisir / passion"
+      },
+      {
+        "a": "اِخْتَارَ",
+        "f": "Choisir"
+      },
+      {
+        "a": "أَهْوَى",
+        "f": "J’aime / je préfère"
+      }
+    ],
+    "Unité 13 – السَّفَرُ | Le voyage": [
+      {
+        "a": "مَطَارٌ",
+        "f": "Aéroport"
+      },
+      {
+        "a": "سَفَرٌ",
+        "f": "Voyage"
+      },
+      {
+        "a": "طَائِرَةٌ",
+        "f": "Avion"
+      },
+      {
+        "a": "مَدِينَةٌ",
+        "f": "Ville"
+      },
+      {
+        "a": "فُنْدُقٌ",
+        "f": "Hôtel"
+      },
+      {
+        "a": "آسِفٌ",
+        "f": "Désolé"
+      },
+      {
+        "a": "إِلَى أَيْنَ",
+        "f": "Vers où ?"
+      },
+      {
+        "a": "اِسْتَطَاعَ",
+        "f": "Pouvoir"
+      },
+      {
+        "a": "أَفْضَلُ",
+        "f": "Meilleur"
+      },
+      {
+        "a": "إِنْ شَاءَ اللَّهُ",
+        "f": "Si Allah veut"
+      },
+      {
+        "a": "اِنْتَظَرَ",
+        "f": "Attendre"
+      },
+      {
+        "a": "بِجَانِبِ",
+        "f": "À côté"
+      },
+      {
+        "a": "بَعِيدٌ",
+        "f": "Loin"
+      },
+      {
+        "a": "قَرِيبٌ",
+        "f": "Proche"
+      },
+      {
+        "a": "جَزَاكَ اللَّهُ خَيْراً",
+        "f": "Qu'Allah te récompense"
+      },
+      {
+        "a": "ذَاهِبٌ",
+        "f": "Partant"
+      },
+      {
+        "a": "سَمِعَ",
+        "f": "Entendre"
+      },
+      {
+        "a": "صَحِيحٌ",
+        "f": "Vrai"
+      },
+      {
+        "a": "مُنَبِّهٌ",
+        "f": "Réveil"
+      },
+      {
+        "a": "فِكْرَةٌ",
+        "f": "Idée"
+      },
+      {
+        "a": "طَيِّبٌ",
+        "f": "Bon"
+      },
+      {
+        "a": "كَسْلَانُ",
+        "f": "Paresseux"
+      },
+      {
+        "a": "مَعَ",
+        "f": "Avec"
+      },
+      {
+        "a": "وَضَعَ",
+        "f": "Poser / Mettre"
+      },
+      {
+        "a": "دَرَّاجَةٌ",
+        "f": "Vélo / Moto"
+      },
+      {
+        "a": "نَقْدٌ",
+        "f": "Argent liquide"
+      },
+      {
+        "a": "جُمْرُكٌ",
+        "f": "Douane"
+      },
+      {
+        "a": "سَفِينَةٌ",
+        "f": "Bateau"
+      },
+      {
+        "a": "مَرْكَبٌ",
+        "f": "Embarcation"
+      },
+      {
+        "a": "وُصُولٌ",
+        "f": "Arrivée"
+      },
+      {
+        "a": "مُغَادَرَةٌ",
+        "f": "Départ"
+      },
+      {
+        "a": "سَيَّارَةُ أُجْرَةٍ",
+        "f": "Taxi"
+      },
+      {
+        "a": "مَحَطَّةٌ",
+        "f": "Gare / Station"
+      },
+      {
+        "a": "هُبُوطٌ",
+        "f": "Atterrissage"
+      },
+      {
+        "a": "إِقْلَاعٌ",
+        "f": "Décollage"
+      },
+      {
+        "a": "تَذْكِرَةٌ",
+        "f": "Billet"
+      },
+      {
+        "a": "جَوَازُ سَفَرٍ",
+        "f": "Passeport"
+      },
+      {
+        "a": "حَقِيبَةٌ",
+        "f": "Valise"
+      },
+      {
+        "a": "مِفْتَاحٌ",
+        "f": "Clé"
+      },
+      {
+        "a": "حَجْزٌ",
+        "f": "Réservation"
+      },
+      {
+        "a": "تَذَاكِرُ",
+        "f": "Billets"
+      },
+      {
+        "a": "تَأْشِيرَةُ الدُّخُولِ",
+        "f": "Visa d’entrée"
+      },
+      {
+        "a": "تَأْشِيرَةُ الخُرُوجِ",
+        "f": "Visa de sortie"
+      },
+      {
+        "a": "الخُطُوطُ الإِنْدُونِيسِيَّةُ",
+        "f": "Les lignes indonésiennes"
+      },
+      {
+        "a": "الخُطُوطُ السُّعُودِيَّةُ",
+        "f": "Les lignes saoudiennes"
+      },
+      {
+        "a": "ضَابِطٌ",
+        "f": "Officier"
+      },
+      {
+        "a": "مَقْبُولَةٌ",
+        "f": "Acceptée"
+      },
+      {
+        "a": "غَرْبٌ",
+        "f": "Ouest"
+      },
+      {
+        "a": "قَادِمٌ",
+        "f": "Arrivant / prochain"
+      },
+      {
+        "a": "إِقَامَةٌ",
+        "f": "Séjour / résidence"
+      },
+      {
+        "a": "الخُطُوطُ الجَوِّيَّةُ",
+        "f": "Compagnie aérienne / lignes aériennes"
+      },
+      {
+        "a": "غَادَرَ",
+        "f": "Quitter / partir"
+      },
+      {
+        "a": "فَتَحَ",
+        "f": "Ouvrir"
+      },
+      {
+        "a": "فَقَدَ",
+        "f": "Perdre"
+      },
+      {
+        "a": "مَطْبُوعَةٌ",
+        "f": "Imprimé / formulaire"
+      },
+      {
+        "a": "وِجْهَةٌ",
+        "f": "Destination"
+      },
+      {
+        "a": "حَجَزَ",
+        "f": "Réserver"
+      }
+    ],
+    "Unité 14 – الحَجُّ وَالعُمْرَةُ | Le Hajj & la Omra": [
+      {
+        "a": "مَكَّةُ",
+        "f": "La Mecque"
+      },
+      {
+        "a": "الْمَدِينَةُ الْمُنَوَّرَةُ",
+        "f": "Médine"
+      },
+      {
+        "a": "الْمَسْجِدُ الْحَرَامُ",
+        "f": "Mosquée sacrée"
+      },
+      {
+        "a": "الْمَسْجِدُ النَّبَوِيُّ",
+        "f": "Mosquée du Prophète"
+      },
+      {
+        "a": "عُمْرَةٌ",
+        "f": "Omra (petit pèlerinage)"
+      },
+      {
+        "a": "طَوَافٌ",
+        "f": "Circumambulation"
+      },
+      {
+        "a": "سَعْيٌ",
+        "f": "Course rituelle"
+      },
+      {
+        "a": "إِحْرَامٌ",
+        "f": "Sacralisation"
+      },
+      {
+        "a": "الْكَعْبَةُ",
+        "f": "La Kaaba"
+      },
+      {
+        "a": "شَوْطٌ",
+        "f": "Tour (circumambulation)"
+      },
+      {
+        "a": "حَلَقَ",
+        "f": "Raser (cheveux)"
+      },
+      {
+        "a": "عِبَادَةٌ",
+        "f": "Adoration"
+      },
+      {
+        "a": "دُعَاءٌ",
+        "f": "Invocation"
+      },
+      {
+        "a": "حَرَامٌ",
+        "f": "Sacré / Interdit"
+      },
+      {
+        "a": "نَبَوِيٌّ",
+        "f": "Prophétique"
+      },
+      {
+        "a": "الشَّمْسُ",
+        "f": "Soleil"
+      },
+      {
+        "a": "الصَّفَا",
+        "f": "As-Safa"
+      },
+      {
+        "a": "طَوَافُ الإِفَاضَةِ",
+        "f": "Tawaf al-ifada"
+      },
+      {
+        "a": "طَوَافُ الوَدَاعِ",
+        "f": "Tawaf d’adieu"
+      },
+      {
+        "a": "عَرَفَاتُ",
+        "f": "Arafat"
+      },
+      {
+        "a": "عَرَفَةُ",
+        "f": "Arafa"
+      },
+      {
+        "a": "عِنْدَ",
+        "f": "Chez / auprès de"
+      },
+      {
+        "a": "عِيدٌ",
+        "f": "Fête"
+      },
+      {
+        "a": "شُرُوقُ الشَّمْسِ",
+        "f": "Lever du soleil"
+      },
+      {
+        "a": "قَصَّرَ",
+        "f": "Raccourcir les cheveux"
+      },
+      {
+        "a": "لَبَنٌ",
+        "f": "Lait fermenté"
+      },
+      {
+        "a": "وُقُوفٌ",
+        "f": "Station / arrêt"
+      },
+      {
+        "a": "شَعَرَ",
+        "f": "Ressentir"
+      },
+      {
+        "a": "صَامَ",
+        "f": "Jeûner"
+      },
+      {
+        "a": "طَافَ",
+        "f": "Faire le tawaf"
+      },
+      {
+        "a": "وَصَلَ",
+        "f": "Arriver"
+      },
+      {
+        "a": "غُرُوبُ الشَّمْسِ",
+        "f": "Coucher du soleil"
+      },
+      {
+        "a": "قَصْرًا",
+        "f": "En raccourcissant / raccourci"
+      }
+    ],
+    "Unité 15 – الصِّحَّةُ | La santé & le corps": [
+      {
+        "a": "الصِّحَّةُ",
+        "f": "Santé"
+      },
+      {
+        "a": "مَرَضٌ",
+        "f": "Maladie"
+      },
+      {
+        "a": "إِمْسَاكٌ",
+        "f": "Constipation"
+      },
+      {
+        "a": "مَغَصٌ",
+        "f": "Mal de ventre"
+      },
+      {
+        "a": "زُكَامٌ",
+        "f": "Rhume"
+      },
+      {
+        "a": "جَرَّاحٌ",
+        "f": "Chirurgien"
+      },
+      {
+        "a": "جُرْحٌ",
+        "f": "Blessure"
+      },
+      {
+        "a": "كَسْرٌ",
+        "f": "Fracture"
+      },
+      {
+        "a": "نَزْفٌ",
+        "f": "Saignement"
+      },
+      {
+        "a": "إِغْمَاءٌ",
+        "f": "Évanouissement"
+      },
+      {
+        "a": "حُمَّى",
+        "f": "Fièvre"
+      },
+      {
+        "a": "إِسْهَالٌ",
+        "f": "Diarrhée"
+      },
+      {
+        "a": "رُعَافٌ",
+        "f": "Saignement de nez"
+      },
+      {
+        "a": "جِسْمٌ",
+        "f": "Corps"
+      },
+      {
+        "a": "رَأْسٌ",
+        "f": "Tête"
+      },
+      {
+        "a": "عَيْنٌ",
+        "f": "Œil"
+      },
+      {
+        "a": "أَنْفٌ",
+        "f": "Nez"
+      },
+      {
+        "a": "فَمٌ",
+        "f": "Bouche"
+      },
+      {
+        "a": "رَقَبَةٌ",
+        "f": "Cou"
+      },
+      {
+        "a": "فَخِذٌ",
+        "f": "Cuisse"
+      },
+      {
+        "a": "كَعْبٌ",
+        "f": "Cheville"
+      },
+      {
+        "a": "سَاقٌ",
+        "f": "Tibia"
+      },
+      {
+        "a": "شَعْرٌ",
+        "f": "Cheveux"
+      },
+      {
+        "a": "عَقِبٌ",
+        "f": "Talon"
+      },
+      {
+        "a": "شَفَةٌ",
+        "f": "Lèvre"
+      },
+      {
+        "a": "أُذُنٌ",
+        "f": "Oreille"
+      },
+      {
+        "a": "يَدٌ",
+        "f": "Main"
+      },
+      {
+        "a": "صَدْرٌ",
+        "f": "Poitrine"
+      },
+      {
+        "a": "بَطْنٌ",
+        "f": "Ventre"
+      },
+      {
+        "a": "ذِرَاعٌ",
+        "f": "Avant-bras"
+      },
+      {
+        "a": "إِصْبَعٌ",
+        "f": "Doigt"
+      },
+      {
+        "a": "رُكْبَةٌ",
+        "f": "Genou"
+      },
+      {
+        "a": "قَدَمٌ",
+        "f": "Pied"
+      },
+      {
+        "a": "مَرِيضٌ",
+        "f": "Malade"
+      },
+      {
+        "a": "ارْتِفَاعٌ",
+        "f": "Hausse / élévation"
+      },
+      {
+        "a": "إِسْعَافٌ",
+        "f": "Secours / ambulance"
+      },
+      {
+        "a": "أَسْنَانٌ",
+        "f": "Dents"
+      },
+      {
+        "a": "أَلَمٌ",
+        "f": "Douleur"
+      },
+      {
+        "a": "البَاقِي",
+        "f": "Le reste"
+      },
+      {
+        "a": "وَبَرَكَاتُهُ",
+        "f": "Et Ses bénédictions"
+      },
+      {
+        "a": "سَلِيمٌ",
+        "f": "Sain"
+      },
+      {
+        "a": "شَدِيدٌ",
+        "f": "Fort / intense"
+      },
+      {
+        "a": "شَفَاكَ اللهُ",
+        "f": "Qu’Allah te guérisse"
+      },
+      {
+        "a": "صُدَاعٌ",
+        "f": "Mal de tête"
+      },
+      {
+        "a": "ضَغْطٌ",
+        "f": "Tension / pression"
+      },
+      {
+        "a": "طَبِيبُ أَسْنَانٍ",
+        "f": "Dentiste"
+      },
+      {
+        "a": "اِرْتَفَعَ",
+        "f": "Monter / s’élever"
+      },
+      {
+        "a": "أَصَابَ",
+        "f": "Atteindre / toucher"
+      },
+      {
+        "a": "زَيْتُونٌ",
+        "f": "Olives"
+      },
+      {
+        "a": "اللَّهُ وَبَرَكَاتُهُ",
+        "f": "Et les bénédictions d’Allah"
+      }
+    ],
+    "Unité 16 – العُطْلَةُ | Les vacances": [
+      {
+        "a": "عُطْلَةٌ",
+        "f": "Vacances"
+      },
+      {
+        "a": "عِيدٌ",
+        "f": "Fête"
+      },
+      {
+        "a": "مَوْعِدٌ",
+        "f": "Rendez-vous"
+      },
+      {
+        "a": "مُسَافِرٌ",
+        "f": "Voyageur"
+      },
+      {
+        "a": "أَبْنَاءٌ",
+        "f": "Fils / enfants"
+      },
+      {
+        "a": "إِذَنْ",
+        "f": "Donc / alors"
+      },
+      {
+        "a": "الإِسْلَامُ",
+        "f": "Islam"
+      },
+      {
+        "a": "أُضْحِيَّةٌ",
+        "f": "Sacrifice de l’Aïd"
+      },
+      {
+        "a": "أَهْلٌ",
+        "f": "Famille / gens"
+      },
+      {
+        "a": "جِبَالٌ",
+        "f": "Montagnes"
+      },
+      {
+        "a": "جُمَادَى الآخِرَةُ",
+        "f": "Joumada al-akhirah"
+      },
+      {
+        "a": "جُمَادَى الأُولَى",
+        "f": "Joumada al-oula"
+      },
+      {
+        "a": "جَوَّالَةٌ",
+        "f": "Scouts"
+      },
+      {
+        "a": "ذُو الحِجَّةِ",
+        "f": "Dhou al-hijja"
+      },
+      {
+        "a": "ذُو القَعْدَةِ",
+        "f": "Dhou al-qaʿda"
+      },
+      {
+        "a": "رَبِيعُ الآخِرِ",
+        "f": "Rabiʿ al-akhir"
+      },
+      {
+        "a": "رَبِيعُ الأَوَّلِ",
+        "f": "Rabiʿ al-awwal"
+      },
+      {
+        "a": "رَجَبٌ",
+        "f": "Rajab"
+      },
+      {
+        "a": "رَخِيصٌ",
+        "f": "Bon marché"
+      },
+      {
+        "a": "زَكَاةُ الفِطْرِ",
+        "f": "Zakat al-fitr"
+      },
+      {
+        "a": "عِيدُ الأَضْحَى",
+        "f": "Aïd al-Adha"
+      },
+      {
+        "a": "عِيدُ الفِطْرِ",
+        "f": "Aïd al-Fitr"
+      },
+      {
+        "a": "غَالٍ",
+        "f": "Cher"
+      },
+      {
+        "a": "فَرِيقٌ",
+        "f": "Équipe"
+      },
+      {
+        "a": "فُقَرَاءُ",
+        "f": "Pauvres"
+      },
+      {
+        "a": "كُلٌّ",
+        "f": "Chaque / tout"
+      },
+      {
+        "a": "مَتَاحِفُ",
+        "f": "Musées"
+      },
+      {
+        "a": "مُخَيَّمٌ",
+        "f": "Camp"
+      },
+      {
+        "a": "أَعْطَى",
+        "f": "Donner"
+      },
+      {
+        "a": "اِقْتَرَبَ",
+        "f": "S’approcher"
+      },
+      {
+        "a": "حَجَّ",
+        "f": "Faire le hajj"
+      },
+      {
+        "a": "رَأَى",
+        "f": "Voir"
+      },
+      {
+        "a": "سَاعَدَ",
+        "f": "Aider"
+      },
+      {
+        "a": "سَافَرَ",
+        "f": "Voyager"
+      },
+      {
+        "a": "قَالَ",
+        "f": "Dire"
+      },
+      {
+        "a": "مُزْدَحِمٌ",
+        "f": "Bondé / encombré"
+      }
+    ]
+  },
+  "Annexes": {
+    "Pays & nationalités": [
+      {
+        "a": "فَرَنْسَا",
+        "f": "France"
+      },
+      {
+        "a": "تُونِسُ",
+        "f": "Tunisie"
+      },
+      {
+        "a": "الْجَزَائِرُ",
+        "f": "Algérie"
+      },
+      {
+        "a": "السِّنِغَالُ",
+        "f": "Sénégal"
+      },
+      {
+        "a": "الْمَغْرِبُ",
+        "f": "Maroc"
+      },
+      {
+        "a": "بَرِيطَانِيَا",
+        "f": "Angleterre"
+      },
+      {
+        "a": "الْمَالِي",
+        "f": "Mali"
+      },
+      {
+        "a": "أُورُوبَّا",
+        "f": "Europe"
+      },
+      {
+        "a": "رُوسِيَا",
+        "f": "Russie"
+      },
+      {
+        "a": "إِسْبَانِيَا",
+        "f": "Espagne"
+      },
+      {
+        "a": "بَلْجِيكَا",
+        "f": "Belgique"
+      },
+      {
+        "a": "إِيطَالِيَا",
+        "f": "Italie"
+      },
+      {
+        "a": "الصِّينُ",
+        "f": "Chine"
+      },
+      {
+        "a": "بَلَدٌ",
+        "f": "Pays"
+      },
+      {
+        "a": "عَاصِمَةٌ",
+        "f": "Capitale"
+      }
+    ],
+    "Nombres": [
+      {
+        "a": "وَاحِدٌ",
+        "f": "Un (1)"
+      },
+      {
+        "a": "اِثْنَانِ",
+        "f": "Deux (2)"
+      },
+      {
+        "a": "ثَلَاثَةٌ",
+        "f": "Trois (3)"
+      },
+      {
+        "a": "أَرْبَعَةٌ",
+        "f": "Quatre (4)"
+      },
+      {
+        "a": "خَمْسَةٌ",
+        "f": "Cinq (5)"
+      },
+      {
+        "a": "سِتَّةٌ",
+        "f": "Six (6)"
+      },
+      {
+        "a": "سَبْعَةٌ",
+        "f": "Sept (7)"
+      },
+      {
+        "a": "ثَمَانِيَةٌ",
+        "f": "Huit (8)"
+      },
+      {
+        "a": "تِسْعَةٌ",
+        "f": "Neuf (9)"
+      },
+      {
+        "a": "عَشَرَةٌ",
+        "f": "Dix (10)"
+      },
+      {
+        "a": "عِشْرُونَ",
+        "f": "Vingt (20)"
+      },
+      {
+        "a": "أَرْبَعُونَ",
+        "f": "Quarante (40)"
+      },
+      {
+        "a": "سِتُّونَ",
+        "f": "Soixante (60)"
+      },
+      {
+        "a": "سَبْعُونَ",
+        "f": "Soixante-dix (70)"
+      },
+      {
+        "a": "تِسْعُونَ",
+        "f": "Quatre-vingt-dix (90)"
+      },
+      {
+        "a": "مِئَةٌ",
+        "f": "Cent (100)"
+      },
+      {
+        "a": "الأُولَى",
+        "f": "Première"
+      },
+      {
+        "a": "الثَّانِيَةُ",
+        "f": "Deuxième"
+      },
+      {
+        "a": "الثَّالِثَةُ",
+        "f": "Troisième"
+      },
+      {
+        "a": "الرَّابِعَةُ",
+        "f": "Quatrième"
+      },
+      {
+        "a": "الخَامِسَةُ",
+        "f": "Cinquième"
+      },
+      {
+        "a": "السَّادِسَةُ",
+        "f": "Sixième / six heures"
+      },
+      {
+        "a": "السَّابِعَةُ",
+        "f": "Septième / sept heures"
+      },
+      {
+        "a": "الثَّامِنَةُ",
+        "f": "Huitième / huit heures"
+      },
+      {
+        "a": "التَّاسِعَةُ",
+        "f": "Neuvième / neuf heures"
+      },
+      {
+        "a": "العَاشِرَةُ",
+        "f": "Dixième / dix heures"
+      },
+      {
+        "a": "حَادِيَةَ عَشْرَةَ",
+        "f": "Onzième féminin"
+      }
+    ],
+    "Métiers supplémentaires": [
+      {
+        "a": "سَبَّاكٌ",
+        "f": "Plombier"
+      },
+      {
+        "a": "حَدَّادٌ",
+        "f": "Forgeron"
+      },
+      {
+        "a": "بَنَّاءٌ",
+        "f": "Maçon"
+      },
+      {
+        "a": "كَهْرَبَائِيٌّ",
+        "f": "Électricien"
+      },
+      {
+        "a": "جَزَّارٌ",
+        "f": "Boucher"
+      },
+      {
+        "a": "مُزَارِعٌ",
+        "f": "Agriculteur"
+      },
+      {
+        "a": "شُرْطِيٌّ",
+        "f": "Policier"
+      },
+      {
+        "a": "سَائِقٌ",
+        "f": "Chauffeur"
+      },
+      {
+        "a": "حَلَّاقٌ",
+        "f": "Coiffeur"
+      },
+      {
+        "a": "طَبَّاخٌ",
+        "f": "Cuisinier"
+      },
+      {
+        "a": "بَقَّالٌ",
+        "f": "Épicier"
+      },
+      {
+        "a": "نَجَّارٌ",
+        "f": "Menuisier"
+      },
+      {
+        "a": "مُوَظَّفٌ",
+        "f": "Employé"
+      }
+    ],
+    "Vêtements supplémentaires": [
+      {
+        "a": "خُفٌّ",
+        "f": "Chausson de cuir"
+      },
+      {
+        "a": "جَوْرَبٌ",
+        "f": "Chaussette"
+      },
+      {
+        "a": "عِمَامَةٌ",
+        "f": "Turban"
+      },
+      {
+        "a": "حِذَاءٌ",
+        "f": "Chaussures"
+      },
+      {
+        "a": "رِدَاءٌ",
+        "f": "Haut (vêtement)"
+      },
+      {
+        "a": "إِزَارٌ",
+        "f": "Pagne"
+      },
+      {
+        "a": "جِلْبَابٌ",
+        "f": "Jelbab"
+      },
+      {
+        "a": "عَبَاءَةٌ",
+        "f": "Cape / Abaya"
+      },
+      {
+        "a": "حِجَابٌ",
+        "f": "Voile"
+      },
+      {
+        "a": "قُفَّازٌ",
+        "f": "Gant"
+      },
+      {
+        "a": "حِزَامٌ",
+        "f": "Ceinture"
+      },
+      {
+        "a": "سَرَاوِيلُ",
+        "f": "Pantalon"
+      }
+    ],
+    "Cuisine — mots supplémentaires": [
+      {
+        "a": "حَلْوَى",
+        "f": "Gâteau / Friandise"
+      },
+      {
+        "a": "تُونَةٌ",
+        "f": "Thon"
+      },
+      {
+        "a": "زَيْتٌ",
+        "f": "Huile"
+      },
+      {
+        "a": "زُبْدَةٌ",
+        "f": "Beurre"
+      },
+      {
+        "a": "مُرَبَّى",
+        "f": "Confiture"
+      },
+      {
+        "a": "فَطِيرَةٌ",
+        "f": "Tarte"
+      },
+      {
+        "a": "كَعْكٌ",
+        "f": "Gâteau"
+      },
+      {
+        "a": "فُولٌ",
+        "f": "Fèves"
+      },
+      {
+        "a": "جُبْنٌ",
+        "f": "Fromage"
+      },
+      {
+        "a": "عَدَسٌ",
+        "f": "Lentilles"
+      },
+      {
+        "a": "عَسَلٌ",
+        "f": "Miel"
+      },
+      {
+        "a": "مِلْعَقَةٌ",
+        "f": "Cuillère"
+      },
+      {
+        "a": "شَوْكَةٌ",
+        "f": "Fourchette"
+      },
+      {
+        "a": "سِكِّينٌ",
+        "f": "Couteau"
+      },
+      {
+        "a": "قِدْرٌ",
+        "f": "Casserole"
+      },
+      {
+        "a": "كَأْسٌ",
+        "f": "Verre"
+      },
+      {
+        "a": "كُوبٌ",
+        "f": "Tasse"
+      },
+      {
+        "a": "إِبْرِيقٌ",
+        "f": "Théière"
+      },
+      {
+        "a": "سُفْرَةٌ",
+        "f": "Nappe"
+      },
+      {
+        "a": "مِكْنَسَةٌ",
+        "f": "Balai"
+      },
+      {
+        "a": "غَسَّالَةٌ",
+        "f": "Machine à laver"
+      }
+    ],
+    "Fruits & légumes supplémentaires": [
+      {
+        "a": "تُفَّاحَةٌ",
+        "f": "Pomme"
+      },
+      {
+        "a": "بُرْتُقَالٌ",
+        "f": "Orange"
+      },
+      {
+        "a": "لَيْمُونٌ",
+        "f": "Citron"
+      },
+      {
+        "a": "مَوْزٌ",
+        "f": "Banane"
+      },
+      {
+        "a": "تُوتٌ",
+        "f": "Mûre / Framboise"
+      },
+      {
+        "a": "خَوْخٌ",
+        "f": "Pêche"
+      },
+      {
+        "a": "مَانْجُو",
+        "f": "Mangue"
+      },
+      {
+        "a": "يُوسُفِيٌّ",
+        "f": "Clémentine"
+      },
+      {
+        "a": "مِشْمِشٌ",
+        "f": "Abricot"
+      },
+      {
+        "a": "تِينٌ",
+        "f": "Figue"
+      },
+      {
+        "a": "رُمَّانٌ",
+        "f": "Grenade"
+      },
+      {
+        "a": "خَضْرَاوَاتٌ",
+        "f": "Légumes"
+      },
+      {
+        "a": "كُرَّاثٌ",
+        "f": "Poireau"
+      },
+      {
+        "a": "خَسٌّ",
+        "f": "Laitue"
+      },
+      {
+        "a": "بَقْدُونِسٌ",
+        "f": "Persil"
+      },
+      {
+        "a": "كُوسَةٌ",
+        "f": "Courgette"
+      },
+      {
+        "a": "قَرْعٌ",
+        "f": "Courge"
+      },
+      {
+        "a": "بَطَاطِسٌ",
+        "f": "Patates"
+      },
+      {
+        "a": "بَاذِنْجَانٌ",
+        "f": "Aubergine"
+      },
+      {
+        "a": "بَامِيَا",
+        "f": "Gombo"
+      },
+      {
+        "a": "ثُومٌ",
+        "f": "Ail"
+      },
+      {
+        "a": "فَاصُولْيَاءُ",
+        "f": "Haricots"
+      },
+      {
+        "a": "فِلْفِلٌ",
+        "f": "Piment / Poivron"
+      }
+    ],
+    "Maison & mobilier supplémentaires": [
+      {
+        "a": "مَرْتَبَةٌ",
+        "f": "Sommier"
+      },
+      {
+        "a": "فِرَاشٌ",
+        "f": "Matelas"
+      },
+      {
+        "a": "غِطَاءٌ",
+        "f": "Couverture"
+      },
+      {
+        "a": "هَاتِفٌ",
+        "f": "Téléphone"
+      },
+      {
+        "a": "مِرْوَحَةٌ",
+        "f": "Ventilateur"
+      },
+      {
+        "a": "خِزَانَةٌ",
+        "f": "Placard"
+      },
+      {
+        "a": "مُكَيِّفٌ",
+        "f": "Climatisation"
+      },
+      {
+        "a": "وِسَادَةٌ",
+        "f": "Oreiller"
+      },
+      {
+        "a": "كُرْسِيٌّ",
+        "f": "Chaise"
+      },
+      {
+        "a": "طَاوِلَةٌ",
+        "f": "Table"
+      },
+      {
+        "a": "مِدْفَأَةٌ",
+        "f": "Chauffage"
+      },
+      {
+        "a": "رَفٌّ",
+        "f": "Étagère"
+      }
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════
+var TOMES=Object.keys(D);
+var ALL=[];
+TOMES.forEach(function(t){var chs=D[t];Object.keys(chs).forEach(function(c){chs[c].forEach(function(w){ALL.push(w)})})});
+
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
+function $(id){return document.getElementById(id)}
+function esc(s){return (s||'').toString().replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/[\r\n]+/g,' ')}
+
+function stripMarks(s){return (s||'').toString().replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'').replace(/ـ/g,'')}
+function norm(s){
+  s=stripMarks(s).toLowerCase().trim();
+  try{s=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')}catch(e){}
+  return s.replace(/[إأٱآا]/g,'ا').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/ة/g,'ه').replace(/œ/g,'oe').replace(/[’']/g,'').replace(/[^0-9a-z\u0600-\u06FF]+/gi,'')
+}
+function puzzleText(s){return (s||'').toString().replace(/[^0-9A-Za-zÀ-ÿŒœ\u0600-\u06FF]/g,'')}
+function puzzleTargetText(s){
+  s=puzzleText(s);
+  return isArabicText(s)?s:s.toLocaleLowerCase('fr-FR');
+}
+function randomFrom(str){return str.charAt(Math.floor(Math.random()*str.length))}
+function extraPuzzleChars(target,count){
+  var ar=isArabicText(target);
+  var pool=ar?'ابتثجحخدذرزسشصضطظعغفقكلمنهويءأإآةى':'abcdefghijklmnopqrstuvwxyzàâéèêëîïôùûüçœ';
+  var out=[];
+  for(var i=0;i<count;i++){out.push(randomFrom(pool))}
+  return out;
+}
+function splitPuzzleChars(s){
+  var out=[],cur='',marks=/[\u064B-\u065F\u0670\u06D6-\u06ED]/;
+  Array.from(s||'').forEach(function(ch){
+    if(marks.test(ch)){if(cur)cur+=ch;else cur=ch}
+    else{if(cur)out.push(cur);cur=ch}
+  });
+  if(cur)out.push(cur);
+  return out;
+}
+function isArabicText(s){return /[\u0600-\u06FF]/.test(s||'')}
+
+
+function loadStats(){try{return JSON.parse(localStorage.getItem('aq3_reclasse'))||{p:0,w:0,b:0}}catch(e){return{p:0,w:0,b:0}}}
+function saveStats(s){try{localStorage.setItem('aq3_reclasse',JSON.stringify(s))}catch(e){}}
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+var S={
+  scr:'home',tome:TOMES[0],mode:'mixed',answerMode:'choice',nc:4,qs:10,
+  questions:[],cur:0,cho:null,score:0,streak:0,ans:[],
+  selCh:null,saved:false,puzzleFor:null,puzzleLetters:[],puzzlePicked:[],
+  searchQ:'',searchResults:[],searchHighlight:null
+};
+
+// ═══════════════════════════════════════════
+//  QUIZ BUILDER
+// ═══════════════════════════════════════════
+function getWrongs(pool,correct,key,count){
+  var filtered=pool.filter(function(w){return w[key]!==correct[key]});
+  return shuffle(filtered).slice(0,count).map(function(w){return w[key]});
+}
+
+function buildQ(pool,qMode,size,nc){
+  var cap=(size==='all')?pool.length:Math.min(size,pool.length);
+  var picked=shuffle(pool).slice(0,cap);
+  return picked.map(function(word){
+    var dir=qMode==='mixed'?(Math.random()>.5?'a2f':'f2a'):qMode;
+    var q=dir==='a2f'?word.a:word.f;
+    var ans=dir==='a2f'?word.f:word.a;
+    var key=dir==='a2f'?'f':'a';
+    var src=pool.length>=nc?pool:ALL;
+    var wrongs=getWrongs(src,word,key,nc-1);
+    return{question:q,answer:ans,opts:shuffle([ans].concat(wrongs)),dir:dir,word:word};
+  });
+}
+
+
+// ═══════════════════════════════════════════
+//  RECHERCHE RAPIDE
+// ═══════════════════════════════════════════
+function htm(s){return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+
+// ═══════════════════════════════════════════
+//  PLURIELS DÉFECTUEUX / CASSÉS
+// ═══════════════════════════════════════════
+var BROKEN_PLURALS = {
+  "اِسْمٌ": "أَسْمَاءٌ",
+  "طَالِبٌ": "طُلَّابٌ",
+  "طَبِيبٌ": "أَطِبَّاءُ",
+  "أَخٌ": "إِخْوَةٌ / إِخْوَانٌ",
+  "صَدِيقٌ": "أَصْدِقَاءُ",
+  "أَبٌ": "آبَاءٌ",
+  "أُمٌّ": "أُمَّهَاتٌ",
+  "أُسْرَةٌ": "أُسَرٌ",
+  "اِبْنٌ": "أَبْنَاءٌ",
+  "بِنْتٌ": "بَنَاتٌ",
+  "وَلَدٌ": "أَوْلَادٌ",
+  "جَدٌّ": "أَجْدَادٌ",
+  "عَمٌّ": "أَعْمَامٌ",
+  "خَالٌ": "أَخْوَالٌ",
+  "شَجَرَةٌ": "أَشْجَارٌ",
+  "صُورَةٌ": "صُوَرٌ",
+  "غُرْفَةٌ": "غُرَفٌ",
+  "مِعْطَفٌ": "مَعَاطِفُ",
+  "بَيْتٌ": "بُيُوتٌ",
+  "بَابٌ": "أَبْوَابٌ",
+  "نَافِذَةٌ": "نَوَافِذُ",
+  "مَطْبَخٌ": "مَطَابِخُ",
+  "أَرِيكَةٌ": "أَرَائِكُ",
+  "سَرِيرٌ": "أَسِرَّةٌ",
+  "سِتَارَةٌ": "سَتَائِرُ",
+  "فُرْنٌ": "أَفْرَانٌ",
+  "مِصْبَاحٌ": "مَصَابِيحُ",
+  "مِرْآةٌ": "مَرَايَا",
+  "بَائِعٌ": "بَاعَةٌ",
+  "حَيٌّ": "أَحْيَاءٌ",
+  "شَارِعٌ": "شَوَارِعُ",
+  "دَوْرٌ": "أَدْوَارٌ",
+  "رَقْمٌ": "أَرْقَامٌ",
+  "حَدِيقَةٌ": "حَدَائِقُ",
+  "مَوْقِفٌ": "مَوَاقِفُ",
+  "مِصْعَدٌ": "مَصَاعِدُ",
+  "يَوْمٌ": "أَيَّامٌ",
+  "صَحِيفَةٌ": "صُحُفٌ",
+  "كِتَابٌ": "كُتُبٌ",
+  "كَبِيرٌ": "كِبَارٌ",
+  "صَغِيرٌ": "صِغَارٌ",
+  "طَعَامٌ": "أَطْعِمَةٌ",
+  "لَحْمٌ": "لُحُومٌ",
+  "سَمَكَةٌ": "أَسْمَاكٌ",
+  "فَاكِهَةٌ": "فَوَاكِهُ",
+  "مَاءٌ": "مِيَاهٌ",
+  "مَائِدَةٌ": "مَوَائِدُ",
+  "مَطْعَمٌ": "مَطَاعِمُ",
+  "ضَيْفٌ": "ضُيُوفٌ",
+  "زَوْجٌ": "أَزْوَاجٌ",
+  "مَسْجِدٌ": "مَسَاجِدُ",
+  "رَسُولٌ": "رُسُلٌ",
+  "مَدْرَسَةٌ": "مَدَارِسُ",
+  "صَفٌّ": "صُفُوفٌ",
+  "حِصَّةٌ": "حِصَصٌ",
+  "مَادَّةٌ": "مَوَادُّ",
+  "جَدْوَلٌ دِرَاسِيٌّ": "جَدَاوِلُ دِرَاسِيَّةٌ",
+  "حَاسُوبٌ": "حَوَاسِيبُ",
+  "أُسْبُوعٌ": "أَسَابِيعُ",
+  "شَهْرٌ": "أَشْهُرٌ / شُهُورٌ",
+  "عَامٌ": "أَعْوَامٌ",
+  "وَقْتٌ": "أَوْقَاتٌ",
+  "عَمَلٌ": "أَعْمَالٌ",
+  "مِهْنَةٌ": "مِهَنٌ",
+  "طِفْلٌ": "أَطْفَالٌ",
+  "صَيْدَلِيٌّ": "صَيَادِلَةٌ",
+  "مَرْحَلَةٌ": "مَرَاحِلُ",
+  "ثَوْبٌ": "ثِيَابٌ",
+  "قَمِيصٌ": "قُمْصَانٌ",
+  "دَفْتَرٌ": "دَفَاتِرُ",
+  "دِينَارٌ": "دَنَانِيرُ",
+  "طَبَقٌ": "أَطْبَاقٌ",
+  "عُلْبَةٌ": "عُلَبٌ",
+  "مُعْجَمٌ": "مَعَاجِمُ",
+  "اِمْرَأَةٌ": "نِسَاءٌ",
+  "جَوٌّ": "أَجْوَاءٌ",
+  "بَرْقٌ": "بُرُوقٌ",
+  "رَعْدٌ": "رُعُودٌ",
+  "رِيحٌ": "رِيَاحٌ",
+  "فَصْلٌ": "فُصُولٌ",
+  "شَيْءٌ": "أَشْيَاءُ",
+  "عَائِلَةٌ": "عَوَائِلُ",
+  "عُمْرٌ": "أَعْمَارٌ",
+  "تَارِيخٌ": "تَوَارِيخُ",
+  "جِنْسٌ": "أَجْنَاسٌ",
+  "عُنْوَانٌ": "عَنَاوِينُ",
+  "مَنْزِلٌ": "مَنَازِلُ",
+  "دِينٌ": "أَدْيَانٌ",
+  "حَفِيدٌ": "أَحْفَادٌ",
+  "رَجُلٌ": "رِجَالٌ",
+  "مَدِينَةٌ": "مُدُنٌ",
+  "فُنْدُقٌ": "فَنَادِقُ",
+  "فِكْرَةٌ": "أَفْكَارٌ",
+  "جُمْرُكٌ": "جَمَارِكُ",
+  "سَفِينَةٌ": "سُفُنٌ",
+  "مَرْكَبٌ": "مَرَاكِبُ",
+  "تَذْكِرَةٌ": "تَذَاكِرُ",
+  "حَقِيبَةٌ": "حَقَائِبُ",
+  "مِفْتَاحٌ": "مَفَاتِيحُ",
+  "شَوْطٌ": "أَشْوَاطٌ",
+  "دُعَاءٌ": "أَدْعِيَةٌ",
+  "مَرَضٌ": "أَمْرَاضٌ",
+  "جُرْحٌ": "جُرُوحٌ",
+  "كَسْرٌ": "كُسُورٌ",
+  "جِسْمٌ": "أَجْسَامٌ",
+  "رَأْسٌ": "رُؤُوسٌ",
+  "عَيْنٌ": "عُيُونٌ",
+  "أَنْفٌ": "أُنُوفٌ",
+  "فَمٌ": "أَفْوَاهٌ",
+  "رَقَبَةٌ": "رِقَابٌ",
+  "فَخِذٌ": "أَفْخَاذٌ",
+  "كَعْبٌ": "كُعُوبٌ",
+  "سَاقٌ": "سِيقَانٌ",
+  "شَفَةٌ": "شِفَاهٌ",
+  "أُذُنٌ": "آذَانٌ",
+  "يَدٌ": "أَيْدٍ / أَيَادٍ",
+  "صَدْرٌ": "صُدُورٌ",
+  "بَطْنٌ": "بُطُونٌ",
+  "ذِرَاعٌ": "أَذْرُعٌ",
+  "إِصْبَعٌ": "أَصَابِعُ",
+  "رُكْبَةٌ": "رُكَبٌ",
+  "قَدَمٌ": "أَقْدَامٌ",
+  "مَرِيضٌ": "مَرْضَى",
+  "بَلَدٌ": "بِلَادٌ / بُلْدَانٌ",
+  "عَاصِمَةٌ": "عَوَاصِمُ",
+  "سَائِقٌ": "سُوَّاقٌ",
+  "خُفٌّ": "خِفَافٌ",
+  "جَوْرَبٌ": "جَوَارِبُ",
+  "عِمَامَةٌ": "عَمَائِمُ",
+  "حِذَاءٌ": "أَحْذِيَةٌ",
+  "رِدَاءٌ": "أَرْدِيَةٌ",
+  "إِزَارٌ": "أُزُرٌ",
+  "جِلْبَابٌ": "جَلَابِيبُ",
+  "حِزَامٌ": "أَحْزِمَةٌ",
+  "زَيْتٌ": "زُيُوتٌ",
+  "فَطِيرَةٌ": "فَطَائِرُ",
+  "جُبْنٌ": "أَجْبَانٌ",
+  "مِلْعَقَةٌ": "مَلَاعِقُ",
+  "سِكِّينٌ": "سَكَاكِينُ",
+  "قِدْرٌ": "قُدُورٌ",
+  "كَأْسٌ": "كُؤُوسٌ",
+  "كُوبٌ": "أَكْوَابٌ",
+  "إِبْرِيقٌ": "أَبَارِيقُ",
+  "مِكْنَسَةٌ": "مَكَانِسُ",
+  "مَرْتَبَةٌ": "مَرَاتِبُ",
+  "فِرَاشٌ": "فُرُشٌ",
+  "غِطَاءٌ": "أَغْطِيَةٌ",
+  "هَاتِفٌ": "هَوَاتِفُ",
+  "مِرْوَحَةٌ": "مَرَاوِحُ",
+  "خِزَانَةٌ": "خَزَائِنُ",
+  "وِسَادَةٌ": "وَسَائِدُ",
+  "كُرْسِيٌّ": "كَرَاسِيُّ",
+  "مِدْفَأَةٌ": "مَدَافِئُ",
+  "رَفٌّ": "رُفُوفٌ",
+  "قِسْمٌ": "أَقْسَامٌ",
+  "سُوقٌ": "أَسْوَاقٌ",
+  "خَيْمَةٌ": "خِيَامٌ",
+  "سَمَاءٌ": "سَمَاوَاتٌ",
+  "شَاطِئٌ": "شَوَاطِئُ",
+  "رِحْلَةٌ": "رِحْلَاتٌ",
+  "سَنَةٌ": "سَنَوَاتٌ",
+  "شَرِكَةٌ": "شَرِكَاتٌ",
+  "حَجْزٌ": "حُجُوزَاتٌ",
+  "ضَابِطٌ": "ضُبَّاطٌ",
+  "إِقَامَةٌ": "إِقَامَاتٌ",
+  "عِيدٌ": "أَعْيَادٌ",
+  "سِنٌّ": "أَسْنَانٌ",
+  "جَبَلٌ": "جِبَالٌ",
+  "فَرِيقٌ": "فِرَقٌ",
+  "مُخَيَّمٌ": "مُخَيَّمَاتٌ",
+  "مَتْحَفٌ": "مَتَاحِفُ",
+  "مَكَانٌ": "أَمَاكِنُ",
+  "شَخْصٌ": "أَشْخَاصٌ",
+  "قَرْيَةٌ": "قُرًى",
+  "مَزْرَعَةٌ": "مَزَارِعُ",
+  "مِنْبَرٌ": "مَنَابِرُ"
+};
+var BROKEN_PLURALS_N = {};
+Object.keys(BROKEN_PLURALS).forEach(function(k){BROKEN_PLURALS_N[norm(k)]={a:k,p:BROKEN_PLURALS[k]}});
+ALL.forEach(function(w){
+  var hit = BROKEN_PLURALS[w.a] || (BROKEN_PLURALS_N[norm(w.a)]&&BROKEN_PLURALS_N[norm(w.a)].p);
+  if(hit)w.p=hit;
+});
+
+// ═══════════════════════════════════════════
+//  VERBES — الماضي / المضارع
+// ═══════════════════════════════════════════
+var VERB_FORMS = {
+  "فَعَلَ": "يَفْعَلُ",
+  "دَخَلَ": "يَدْخُلُ",
+  "خَرَجَ": "يَخْرُجُ",
+  "سَكَنَ": "يَسْكُنُ",
+  "أَرَادَ": "يُرِيدُ",
+  "اِسْتَيْقَظَ": "يَسْتَيْقِظُ",
+  "نَامَ": "يَنَامُ",
+  "ذَهَبَ": "يَذْهَبُ",
+  "رَجَعَ": "يَرْجِعُ",
+  "غَسَلَ": "يَغْسِلُ",
+  "شَاهَدَ": "يُشَاهِدُ",
+  "كَنَسَ": "يَكْنُسُ",
+  "كَوَى": "يَكْوِي",
+  "أَكَلَ": "يَأْكُلُ",
+  "شَرِبَ": "يَشْرَبُ",
+  "جَلَسَ": "يَجْلِسُ",
+  "طَلَبَ": "يَطْلُبُ",
+  "فَضَّلَ": "يُفَضِّلُ",
+  "تَوَضَّأَ": "يَتَوَضَّأُ",
+  "صَلَّى": "يُصَلِّي",
+  "قَرَأَ": "يَقْرَأُ",
+  "سَلَّمَ": "يُسَلِّمُ",
+  "شَاءَ": "يَشَاءُ",
+  "نَظَرَ": "يَنْظُرُ",
+  "دَرَسَ": "يَدْرُسُ",
+  "كَتَبَ": "يَكْتُبُ",
+  "بَدَأَ": "يَبْدَأُ",
+  "اِنْتَهَى": "يَنْتَهِي",
+  "جَاءَ": "يَجِيءُ",
+  "كَانَ": "يَكُونُ",
+  "أَحَبَّ": "يُحِبُّ",
+  "دَرَّسَ": "يُدَرِّسُ",
+  "تَخَرَّجَ": "يَتَخَرَّجُ",
+  "عَمِلَ": "يَعْمَلُ",
+  "اِشْتَرَى": "يَشْتَرِي",
+  "اِسْتَطَاعَ": "يَسْتَطِيعُ",
+  "اِنْتَظَرَ": "يَنْتَظِرُ",
+  "سَمِعَ": "يَسْمَعُ",
+  "وَضَعَ": "يَضَعُ",
+  "حَلَقَ": "يَحْلِقُ",
+  "تَرَكَ": "يَتْرُكُ",
+  "تَكَلَّمَ": "يَتَكَلَّمُ",
+  "حَضَرَ": "يَحْضُرُ",
+  "زَارَ": "يَزُورُ",
+  "اِخْتَارَ": "يَخْتَارُ",
+  "غَادَرَ": "يُغَادِرُ",
+  "فَتَحَ": "يَفْتَحُ",
+  "فَقَدَ": "يَفْقِدُ",
+  "شَعَرَ": "يَشْعُرُ",
+  "صَامَ": "يَصُومُ",
+  "طَافَ": "يَطُوفُ",
+  "وَصَلَ": "يَصِلُ",
+  "اِرْتَفَعَ": "يَرْتَفِعُ",
+  "أَصَابَ": "يُصِيبُ",
+  "أَعْطَى": "يُعْطِي",
+  "اِقْتَرَبَ": "يَقْتَرِبُ",
+  "حَجَّ": "يَحُجُّ",
+  "رَأَى": "يَرَى",
+  "سَاعَدَ": "يُسَاعِدُ",
+  "سَافَرَ": "يُسَافِرُ",
+  "قَالَ": "يَقُولُ",
+  "حَجَزَ": "يَحْجِزُ"
+};
+var VERB_FORMS_N = {};
+Object.keys(VERB_FORMS).forEach(function(k){VERB_FORMS_N[norm(k)]={a:k,v:VERB_FORMS[k]}});
+ALL.forEach(function(w){
+  var hit = VERB_FORMS[w.a];
+  if(hit)w.v=hit;
+});
+
+function primaryPlural(p){return (p||'').split('/')[0].trim()}
+function pluralOfArabic(a){var hit=BROKEN_PLURALS[a]||(BROKEN_PLURALS_N[norm(a)]&&BROKEN_PLURALS_N[norm(a)].p);return hit||''}
+function verbInfo(a){
+  if(VERB_FORMS[a])return {a:a,v:VERB_FORMS[a]};
+  return VERB_FORMS_N[norm(a)]||null;
+}
+function displayVerb(a,v){
+  return '<span class="verbpair" dir="rtl"><span>'+htm(a)+'</span><span class="verbsep">/</span><span>'+htm(v)+'</span></span>';
+}
+function displayArabic(a,p){
+  p=p||pluralOfArabic(a);
+  if(p)return '<span class="plpair" dir="rtl"><span>'+htm(a)+'</span><span class="plsep">ج</span><span>'+htm(p)+'</span></span>';
+  return htm(a);
+}
+function displayArabicWord(w){
+  if(w&&w.v)return displayVerb(w.a,w.v);
+  if(w)return displayArabic(w.a,w.p);
+  return '';
+}
+function hasPlural(w){return !!(w&&(w.p||pluralOfArabic(w.a)))}
+function hasVerb(w){return !!(w&&(w.v||verbInfo(w.a)))}
+function wordForArabic(s){
+  if(!isArabicText(s))return null;
+  var n=norm(s);
+  for(var i=0;i<ALL.length;i++){
+    var w=ALL[i];
+    if(norm(w.a)===n)return w;
+    if(w.p){var ps=w.p.split('/');for(var p=0;p<ps.length;p++){if(norm(ps[p].trim())===n)return w}}
+    if(w.v&&norm(w.v)===n)return w;
+  }
+  return null;
+}
+function chapterBadges(pool){
+  var p=pool.some(function(w){return hasPlural(w)});
+  var v=pool.some(function(w){return hasVerb(w)});
+  var h='';
+  if(p)h+='<span class="mini-badge plural" title="Pluriels cassés">ج</span>';
+  if(v)h+='<span class="mini-badge verb" title="Verbes الماضي/المضارع">فعل</span>';
+  return h?'<span class="tagrow">'+h+'</span>':'';
+}
+function displayMaybePlural(s,w){
+  if(!isArabicText(s))return htm(s);
+  if(w&&w.v){
+    var vpairs=[w.a,w.v,w.a+'/'+w.v,w.a+' / '+w.v];
+    for(var vi=0;vi<vpairs.length;vi++){if(norm(s)===norm(vpairs[vi]))return displayVerb(w.a,w.v)}
+  }
+  var info=verbInfo(s);
+  if(info)return displayVerb(info.a,info.v);
+  if(w&&w.a&&norm(s)===norm(w.a))return displayArabic(w.a,w.p);
+  if(w&&w.p){
+    var ps=w.p.split('/').map(function(x){return x.trim()}).filter(Boolean);
+    for(var i=0;i<ps.length;i++){if(norm(s)===norm(ps[i]))return displayArabic(w.a,w.p)}
+  }
+  var matched=wordForArabic(s);
+  if(matched)return displayArabicWord(matched);
+  return displayArabic(s);
+}
+function expectedAnswer(q){return (S.answerMode==='puzzle'&&q&&q.puzzleTarget)?q.puzzleTarget:q.answer}
+function acceptedAnswers(q){
+  var arr=[expectedAnswer(q), q.answer];
+  if(q&&q.word&&q.word.v&&isArabicText(q.answer)){
+    arr.push(q.word.a);
+    arr.push(q.word.v);
+    arr.push(q.word.a+'/'+q.word.v);
+    arr.push(q.word.a+' / '+q.word.v);
+    arr.push(q.word.a+' '+q.word.v);
+  }
+  if(q&&q.word&&q.word.p&&isArabicText(q.answer)){
+    arr.push(q.word.a);
+    q.word.p.split('/').forEach(function(p){p=p.trim();if(p){arr.push(p);arr.push(q.word.a+' '+p);arr.push(p+' '+q.word.a)}});
+    arr.push(q.word.a+' '+q.word.p);
+  }
+  var seen={};
+  return arr.filter(function(x){x=(x||'').toString().trim();var n=norm(x);if(!x||seen[n])return false;seen[n]=true;return true});
+}
+function isCorrect(q,chosen){
+  var c=norm(chosen);
+  return acceptedAnswers(q).some(function(a){return norm(a)===c});
+}
+function containsPlural(q,chosen){
+  if(!(q&&q.word&&q.word.p))return true;
+  var c=norm(chosen);
+  return q.word.p.split('/').some(function(p){return p.trim()&&c.indexOf(norm(p.trim()))>=0});
+}
+function containsVerb(q,chosen){
+  if(!(q&&q.word&&q.word.v))return true;
+  var c=norm(chosen);
+  return c.indexOf(norm(q.word.v))>=0 || c.indexOf(norm(q.word.a))>=0 && c.indexOf(norm(q.word.v))>=0;
+}
+function answerDisplay(q,val){return displayMaybePlural(val||expectedAnswer(q),q&&q.word)}
+var SEARCH_INDEX=[];
+TOMES.forEach(function(t){
+  Object.keys(D[t]).forEach(function(ch){
+    D[t][ch].forEach(function(w){
+      SEARCH_INDEX.push({tome:t,chapter:ch,a:w.a,f:w.f,p:w.p||'',v:w.v||'',word:w,hay:norm(w.a+' '+(w.p||'')+' '+(w.v||'')+' '+w.f+' '+ch+' '+t)})
+    })
+  })
+});
+function findWords(q){
+  var n=norm(q);
+  if(!n)return [];
+  var exact=[];var starts=[];var contains=[];
+  SEARCH_INDEX.forEach(function(r){
+    var na=norm(r.a), nf=norm(r.f), nc=norm(r.chapter);
+    if(na===n||nf===n)exact.push(r);
+    else if(na.indexOf(n)===0||nf.indexOf(n)===0)starts.push(r);
+    else if(r.hay.indexOf(n)>=0||nc.indexOf(n)>=0)contains.push(r);
+  });
+  return exact.concat(starts,contains).slice(0,12);
+}
+function renderSearch(){
+  var box=$('searchFloat');
+  if(!box)return;
+  var q=S.searchQ||'';
+  var h='<div class="sfbox"><span class="sficon">🔎</span>';
+  h+='<input id="sfinput" class="sfinput" type="search" value="'+htm(q)+'" placeholder="Rechercher un mot…" oninput="doSearch(this.value)" onkeydown="searchKey(event)" autocomplete="off">';
+  if(q)h+='<button class="sfclear" onclick="clearSearch()">×</button>';
+  h+='</div>';
+  if(q){
+    h+='<div class="sfres">';
+    if(S.searchResults&&S.searchResults.length){
+      S.searchResults.forEach(function(r,i){
+        h+='<button class="sfitem" onclick="openSearchResult('+i+')">';
+        h+='<div class="sfword"><span class="sf-ar" dir="rtl">'+displayArabicWord(r.word)+'</span><span class="sf-fr">'+htm(r.f)+'</span></div>';
+        h+='<div class="sfmeta">'+htm(r.tome)+' · '+htm(r.chapter)+'</div>';
+        h+='</button>';
+      });
+    }else{
+      h+='<div class="sfempty">Aucun mot trouvé</div>';
+    }
+    h+='</div>';
+  }
+  box.innerHTML=h;
+}
+function doSearch(v){
+  S.searchQ=v;
+  S.searchResults=findWords(v);
+  renderSearch();
+  var inp=$('sfinput');
+  if(inp){inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length)}catch(e){}}
+}
+function searchKey(e){
+  if(e.key==='Enter'&&S.searchResults&&S.searchResults.length){openSearchResult(0)}
+}
+function clearSearch(){
+  S.searchQ='';S.searchResults=[];S.searchHighlight=null;renderSearch();
+}
+function openSearchResult(i){
+  var r=S.searchResults[i];
+  if(!r)return;
+  S.tome=r.tome;
+  S.scr='home';
+  S.searchHighlight={tome:r.tome,chapter:r.chapter,a:r.a,f:r.f};
+  S.searchQ='';
+  S.searchResults=[];
+  render();
+
+// ═══════════════════════════════════════════
+//  PWA — Manifest · Install prompt · Service Worker
+// ═══════════════════════════════════════════
+(function(){
+  // 1. Manifest dynamique (data URI)
+  var ic='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#5d3a1a"/><text x="256" y="370" font-size="300" fill="#fdf6ed" font-family="serif" text-anchor="middle">ب</text></svg>';
+  var mf={name:'بَيْنَ يَدَيْكَ — Quiz Arabe',short_name:'Quiz Arabe',description:'Vocabulaire arabe Bayna Yadayk',start_url:'.',display:'standalone',background_color:'#fdf6ed',theme_color:'#5d3a1a',orientation:'portrait-primary',lang:'fr',icons:[{src:'data:image/svg+xml,'+encodeURIComponent(ic),sizes:'any',type:'image/svg+xml',purpose:'any maskable'}]};
+  var lnk=document.createElement('link');
+  lnk.rel='manifest';
+  lnk.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(mf));
+  document.head.appendChild(lnk);
+
+  var bar=document.getElementById('pwa-bar');
+  var sub=document.getElementById('pwa-sub');
+  var btn=document.getElementById('pwa-btn');
+
+  // Déjà installé ou banner refusé ?
+  var dismissed=false;
+  try{dismissed=!!localStorage.getItem('pwa_dismissed')}catch(e){}
+  var standalone=window.navigator.standalone===true||window.matchMedia('(display-mode:standalone)').matches;
+  if(standalone||dismissed){if(bar)bar.style.display='none';return}
+
+  // 2. Android / Chrome — beforeinstallprompt
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();deferredPrompt=e;
+    if(bar)bar.classList.add('show');
+  });
+  window.addEventListener('appinstalled',function(){
+    deferredPrompt=null;if(bar)bar.classList.remove('show');
+  });
+  window.installPWA=function(){
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(){deferredPrompt=null;if(bar)bar.classList.remove('show')});
+    }
+  };
+
+  // 3. iOS — instructions manuelles
+  var ios=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
+  if(ios){
+    if(sub)sub.textContent='iOS : Partager ⎦ → Écran d\'accueil';
+    if(btn){btn.textContent='Comment ?';btn.onclick=function(){alert('Sur Safari iOS :\n1. Appuyez sur le bouton Partager  ⎦\n2. Sélectionnez « Sur l\'écran d\'accueil »\n3. Confirmez « Ajouter »')}}
+    if(bar)bar.classList.add('show');
+  }
+
+  // 4. Service Worker (blob URL — fonctionne si hébergé sur HTTPS)
+  if('serviceWorker' in navigator){
+    var sw="const C='byk-v2';"
+      +"self.addEventListener('install',e=>{self.skipWaiting();"
+      +"e.waitUntil(caches.open(C).then(c=>c.add('/')))});"
+      +"self.addEventListener('activate',e=>{"
+      +"e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));"
+      +"clients.claim()});"
+      +"self.addEventListener('fetch',e=>{"
+      +"e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>r)))});";
+    try{
+      var blob=new Blob([sw],{type:'text/javascript'});
+      var swUrl=URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl,{scope:'./'})
+        .then(function(r){console.log('[PWA] SW enregistré:',r.scope)})
+        .catch(function(){console.log('[PWA] SW blob refusé — hébergez sur HTTPS avec sw.js séparé')});
+    }catch(e){console.log('[PWA] SW non disponible dans cet environnement')}
+  }
+})();
+
+window.dismissPWA=window.dismissPWA||function(){
+  var bar=document.getElementById('pwa-bar');
+  if(bar)bar.classList.remove('show');
+  try{localStorage.setItem('pwa_dismissed','1')}catch(e){}
+};
+window.installPWA=window.installPWA||function(){};
+  setTimeout(function(){
+    var el=document.querySelector('.card.found');
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});try{el.focus()}catch(e){}}
+  },80);
+  setTimeout(function(){if(S.searchHighlight){S.searchHighlight=null;render()}},2200);
+}
+
+// ═══════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════
+function render(){
+  var app=$('app');
+  if(S.scr==='home')renderHome(app);
+  else if(S.scr==='quiz')renderQuiz(app);
+  else renderResult(app);
+  renderSearch();
+}
+
+// ── HOME ──
+function renderHome(el){
+  var stats=loadStats();
+  var tomeData=D[S.tome];
+  var chapters=Object.keys(tomeData);
+  var tomeWords=[];
+  chapters.forEach(function(c){tomeWords=tomeWords.concat(tomeData[c])});
+
+  var sizeOpts=[5,10,15,20,25,30,'all'];
+  var h='<div class="hdr"><div class="hdr-ar">بَيْنَ يَدَيْكَ</div>';
+  h+='<div class="hdr-sub">Vocabulaire classé par unités — pluriels cassés & verbes الماضي/المضارع</div>';
+  h+='<div class="hdr-badge">'+ALL.length+' mots · '+TOMES.length+' tomes</div></div>';
+
+  // Tome tabs
+  h+='<div class="tabs">';
+  TOMES.forEach(function(t){
+    h+='<button class="tab'+(S.tome===t?' on':'')+'" onclick="setTome(\''+esc(t)+'\')">'+t+'</button>';
+  });
+  h+='</div>';
+
+  // Direction
+  h+='<div class="sb"><div class="sb-t">Direction</div><div class="chips">';
+  [{i:'a2f',l:'عربي → Fr'},{i:'f2a',l:'Fr → عربي'},{i:'mixed',l:'🔀 Mixte'}].forEach(function(m){
+    h+='<button class="chip'+(S.mode===m.i?' on':'')+'" onclick="setMode(\''+m.i+'\')">'+m.l+'</button>';
+  });
+  h+='</div></div>';
+
+  // Answer mode
+  h+='<div class="sb"><div class="sb-t">Propositions</div><div class="chips">';
+  [2,4,6].forEach(function(n){
+    h+='<button class="chip'+(S.answerMode==='choice'&&S.nc===n?' on':'')+'" onclick="setNc('+n+')">'+n+' choix</button>';
+  });
+  h+='<button class="chip'+(S.answerMode==='write'?' on':'')+'" onclick="setAnswerMode(\'write\')">✍️ Écrire</button>';
+  h+='<button class="chip'+(S.answerMode==='puzzle'?' on':'')+'" onclick="setAnswerMode(\'puzzle\')">🧩 Puzzle</button>';
+  h+='</div><div class="mode-note">Écrire : singulier accepté · Puzzle : singulier ou pluriel</div></div>';
+
+  // Size
+  h+='<div class="sb"><div class="sb-t">Questions</div><div class="chips">';
+  sizeOpts.forEach(function(n){
+    var v=typeof n==='number'?n:"'all'";
+    var l=n==='all'?'Tout':n;
+    h+='<button class="chip'+(S.qs===n?' on':'')+'" onclick="setQs('+v+')">'+l+'</button>';
+  });
+  h+='</div></div>';
+
+  // Focus modes
+  h+='<div class="sb"><div class="sb-t">Révision ciblée</div><div class="chips">';
+  h+='<button class="chip" onclick="startPlurals()">ج Pluriels uniquement</button>';
+  h+='<button class="chip" onclick="startVerbs()">فعل Verbes uniquement</button>';
+  h+='</div><div class="mode-note">Pour réviser seulement les mots avec pluriel cassé ou les verbes.</div></div>';
+
+  // Chapters
+  h+='<div class="grid">';
+  // All words button
+  h+='<button class="card all" onclick="startAll()"><span class="cnum">🌟</span>';
+  h+='<span class="clbl">TOUS les mots</span><span class="cbdg">'+ALL.length+'</span></button>';
+  // Tome all
+  h+='<button class="card ta" onclick="startTome()"><span class="cnum">📚</span>';
+  h+='<span class="clbl">Tout '+S.tome+'</span><span class="cbdg">'+tomeWords.length+'</span></button>';
+  // Each chapter
+  chapters.forEach(function(ch,i){
+    var foundCls=(S.searchHighlight&&S.searchHighlight.tome===S.tome&&S.searchHighlight.chapter===ch)?' found':'';
+    h+='<button class="card'+foundCls+'" onclick="startCh(\''+esc(ch)+'\')">';
+    h+='<span class="cnum">'+(i+1)+'</span>';
+    h+='<span class="clbl">'+ch+chapterBadges(tomeData[ch])+'</span>';
+    h+='<span class="cbdg">'+tomeData[ch].length+'</span></button>';
+  });
+  h+='</div>';
+
+  if(stats.p>0){
+    h+='<div class="sv">📊 <b>'+stats.p+'</b> parties · <b>'+stats.w+'</b> sans faute · Meilleur : <b>'+stats.b+'%</b></div>';
+  }
+  el.innerHTML=h;
+}
+
+// ── QUIZ ──
+function renderQuiz(el){
+  var q=S.questions[S.cur];
+  if(!q)return;
+  var pct=(S.cur/S.questions.length)*100;
+  var cols=S.nc===2?2:S.nc===4?2:3;
+
+  var h='<div class="qt"><button class="qbk" onclick="goHome()">← Retour</button>';
+  h+='<span class="qcn">'+(S.cur+1)+' / '+S.questions.length+'</span>';
+  h+='<span class="qsc">⭐ '+S.score+'</span></div>';
+  h+='<div class="pbar"><div class="pfill" style="width:'+pct+'%"></div></div>';
+
+  if(S.streak>=3&&S.cho===null){
+    h+='<div class="streak">🔥 Série de '+S.streak+' !</div>';
+  }
+
+  h+='<div class="qcard"><div class="qdir">'+(q.dir==='a2f'?'Traduis en français':'Comment dit-on en arabe ?')+'</div>';
+  if(q.dir==='a2f'){
+    h+='<div class="qar" dir="rtl">'+displayMaybePlural(q.question,q.word)+'</div>';
+  }else{
+    h+='<div class="qfr">'+q.question+'</div>';
+  }
+  h+='</div>';
+
+  if(S.answerMode==='choice'){
+    h+='<div class="opts" style="grid-template-columns:repeat('+cols+',1fr)">';
+    q.opts.forEach(function(opt,i){
+      var cls='ob';
+      if(S.cho!==null){
+        if(opt===q.answer)cls+=' ok';
+        else if(opt===S.cho)cls+=' bad';
+        else cls+=' dim';
+      }
+      var isAr=q.dir==='f2a';
+      var tcls=isAr?'ot ar':'ot';
+      if(isAr)cls+=' ar-opt';
+      h+='<button class="'+cls+'" onclick="pick(\''+esc(opt)+'\')"'+(isAr?' dir="rtl"':'')+'>';
+      h+='<span class="ol">'+String.fromCharCode(65+i)+'</span>';
+      h+='<span class="'+tcls+'">'+displayMaybePlural(opt,wordForArabic(opt))+'</span></button>';
+    });
+    h+='</div>';
+  }else if(S.answerMode==='write'){
+    var ar=isArabicText(q.answer);
+    h+='<div class="writebox">';
+    h+='<input id="wans" class="winput '+(ar?'ar':'')+'" '+(ar?'dir="rtl"':'')+' autocomplete="off" autocapitalize="off" placeholder="Écris ta réponse ici" onkeydown="if(event.key===\'Enter\')checkWrite()" '+(S.cho!==null?'disabled value="'+htm(S.cho)+'"':'')+'>';
+    h+='<div class="whint">Les voyelles arabes ne sont pas obligatoires.</div>';
+    if(S.cho===null)h+='<div class="brow"><button class="bp" onclick="checkWrite()">Valider</button></div>';
+    h+='</div>';
+  }else{
+    initPuzzle(q);
+    h+='<div class="puzzle">';
+    var pzAr=isArabicText(expectedAnswer(q));
+    h+='<div class="pz-answer '+(S.puzzlePicked.length?'':'empty')+'" '+(pzAr?'dir="rtl"':'')+'>';
+    if(S.puzzlePicked.length){
+      if(pzAr){
+        h+='<span class="pz-joined ar" dir="rtl">'+htm(puzzleCurrent())+'</span>';
+        if(S.cho===null)h+='<button class="letter ar back" onclick="removePuzzleLast()">⌫</button>';
+      }else{
+        S.puzzlePicked.forEach(function(id,pos){
+          var pickedLetter=S.puzzleLetters.filter(function(x){return x.id===id})[0];
+          h+='<button class="letter" '+(S.cho!==null?'disabled':'')+' onclick="removePuzzle('+pos+')">'+htm(pickedLetter?pickedLetter.ch:'')+'</button>';
+        });
+      }
+    }else h+='Appuie sur les lettres pour former le mot';
+    h+='</div>';
+    h+='<div class="pz-letters" '+(isArabicText(expectedAnswer(q))?'dir="rtl"':'')+'>';
+    S.puzzleLetters.forEach(function(l){
+      var used=S.puzzlePicked.indexOf(l.id)>=0;
+      h+='<button class="letter '+(isArabicText(expectedAnswer(q))?'ar':'')+(used?' used':'')+'" '+(S.cho!==null?'disabled':'')+' onclick="addPuzzle('+l.id+')">'+htm(l.ch)+'</button>';
+    });
+    h+='</div>';
+    if(S.cho===null)h+='<div class="pz-actions"><button class="bs" onclick="clearPuzzle()">Effacer</button><button class="bp" onclick="checkPuzzle()">Valider</button></div>';
+    h+='</div>';
+  }
+
+  if(S.cho!==null){
+    var ok=isCorrect(q,S.cho);
+    var lbl=S.cur+1>=S.questions.length?'Voir les résultats 🏁':'Suivante →';
+    var msg=ok?'✅ Bonne réponse !':'❌ Réponse : '+answerDisplay(q);
+    h+='<div class="fb"><div class="fbm">'+msg+'</div>';
+    if(ok&&S.answerMode==='write'&&q.word&&q.word.p&&isArabicText(q.answer)&&!containsPlural(q,S.cho)){
+      h+='<div class="plural-note">ℹ️ Pluriel : '+displayArabic(q.word.a,q.word.p)+'</div>';
+    }
+    if(ok&&S.answerMode==='write'&&q.word&&q.word.v&&isArabicText(q.answer)&&norm(S.cho)!==norm(q.word.a+' '+q.word.v)&&norm(S.cho)!==norm(q.word.a+'/'+q.word.v)&&norm(S.cho)!==norm(q.word.a+' / '+q.word.v)){
+      h+='<div class="plural-note">ℹ️ Forme complète : '+displayVerb(q.word.a,q.word.v)+'</div>';
+    }
+    h+='<button class="bp" onclick="nxt()">'+lbl+'</button></div>';
+  }
+  el.innerHTML=h;
+}
+
+// ── RESULT ──
+function renderResult(el){
+  var total=S.questions.length;
+  var pct=Math.round(S.score/total*100);
+  var wc=S.ans.filter(function(x){return!x.ok}).length;
+  var emoji=pct===100?'🏆':pct>=80?'⭐':pct>=60?'👍':pct>=40?'📖':'💪';
+  var com=pct===100?'Parfait ! ماشاء الله':pct>=70?'Très bien ! Continue 👏':'Continue à réviser ! 💪';
+
+  if(!S.saved){
+    var stats=loadStats();
+    stats.p++;if(wc===0)stats.w++;if(pct>stats.b)stats.b=pct;saveStats(stats);
+    S.saved=true;
+  }
+
+  var h='<div class="rb"><div class="re">'+emoji+'</div>';
+  h+='<div class="rl">Résultat</div><div class="rs">'+S.score+' / '+total+'</div>';
+  h+='<div class="rp">'+pct+'%</div><div class="rc">'+com+'</div>';
+
+  h+='<div class="rvl">';
+  S.ans.forEach(function(x){
+    var c=x.ok?'ok':'bad';
+    h+='<div class="rvi '+c+'"><span class="rm '+c+'">'+(x.ok?'✓':'✗')+'</span>';
+    h+='<span style="font-weight:700;color:#3e2010;'+(x.dir==='a2f'?'direction:rtl':'')+'">'+displayMaybePlural(x.question,x.word)+'</span>';
+    h+='<span style="color:#a07850">→</span><span style="color:#5d3a1a;font-weight:600">'+x.answer+'</span>';
+    if(!x.ok)h+='<span style="color:#c62828;font-size:.65rem">(tu: '+x.chosen+')</span>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  h+='<div class="brow"><button class="bp" onclick="replay()">🔄 Rejouer</button>';
+  if(wc>0)h+='<button class="bp er" onclick="retryErr()">❌ Refaire '+wc+' erreur'+(wc>1?'s':'')+'</button>';
+  h+='<button class="bs" onclick="goHome()">🏠 Accueil</button></div></div>';
+  el.innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+//  ACTIONS
+// ═══════════════════════════════════════════
+function setTome(t){S.tome=t;render()}
+function setMode(m){S.mode=m;render()}
+function setNc(n){S.nc=n;S.answerMode='choice';render()}
+function setAnswerMode(m){S.answerMode=m;render()}
+function setQs(n){S.qs=n;render()}
+
+function launch(pool,label){
+  S.questions=buildQ(pool,S.mode,S.qs,S.nc);
+  S.cur=0;S.cho=null;S.score=0;S.streak=0;S.ans=[];
+  S.puzzleFor=null;S.puzzleLetters=[];S.puzzlePicked=[];
+  S.selCh=label;S.saved=false;S.searchHighlight=null;S.scr='quiz';render();window.scrollTo(0,0);
+}
+
+function startCh(ch){
+  launch(D[S.tome][ch],ch);
+}
+function startTome(){
+  var pool=[];Object.keys(D[S.tome]).forEach(function(c){pool=pool.concat(D[S.tome][c])});
+  launch(pool,S.tome);
+}
+function startAll(){launch(ALL,'all')}
+function startPlurals(){launch(ALL.filter(function(w){return hasPlural(w)}),'plurals')}
+function startVerbs(){launch(ALL.filter(function(w){return hasVerb(w)}),'verbs')}
+
+function recordAnswer(chosen){
+  if(S.cho!==null)return;
+  var q=S.questions[S.cur];
+  var ok=isCorrect(q,chosen);
+  S.cho=chosen;
+  if(ok){S.score++;S.streak++}else{S.streak=0}
+  S.ans.push({question:q.question,answer:q.answer,chosen:chosen,ok:ok,dir:q.dir,word:q.word});
+  render();
+}
+
+function pick(opt){recordAnswer(opt)}
+
+function checkWrite(){
+  var inp=$('wans');
+  if(!inp)return;
+  var v=inp.value.trim();
+  if(!v)return;
+  recordAnswer(v);
+}
+
+function initPuzzle(q){
+  if(S.puzzleFor===S.cur)return;
+  q.puzzleTarget=q.answer;
+  if(isArabicText(q.answer)&&q.word&&q.word.v){
+    q.puzzleTarget=(Math.random()>.5)?q.word.v:q.word.a;
+  }else if(isArabicText(q.answer)&&q.word&&q.word.p){
+    q.puzzleTarget=(Math.random()>.5)?primaryPlural(q.word.p):q.word.a;
+  }
+  var txt=puzzleTargetText(q.puzzleTarget);
+  q.puzzleTarget=txt;
+  var chars=splitPuzzleChars(txt);
+  var extras=extraPuzzleChars(txt,3);
+  var allChars=chars.concat(extras);
+  S.puzzleLetters=shuffle(allChars.map(function(ch,i){return{ch:ch,id:i}}));
+  S.puzzlePicked=[];
+  S.puzzleFor=S.cur;
+}
+function addPuzzle(id){if(S.cho!==null)return;if(S.puzzlePicked.indexOf(id)<0){S.puzzlePicked.push(id);render()}}
+function removePuzzle(pos){if(S.cho!==null)return;S.puzzlePicked.splice(pos,1);render()}
+function removePuzzleLast(){if(S.cho!==null)return;S.puzzlePicked.pop();render()}
+function clearPuzzle(){if(S.cho!==null)return;S.puzzlePicked=[];render()}
+function puzzleCurrent(){
+  return S.puzzlePicked.map(function(id){
+    for(var i=0;i<S.puzzleLetters.length;i++){if(S.puzzleLetters[i].id===id)return S.puzzleLetters[i].ch}
+    return '';
+  }).join('');
+}
+function checkPuzzle(){
+  if(!S.puzzlePicked.length)return;
+  recordAnswer(puzzleCurrent());
+}
+
+function nxt(){
+  if(S.cur+1>=S.questions.length)S.scr='result';
+  else{S.cur++;S.cho=null;S.puzzleFor=null;S.puzzleLetters=[];S.puzzlePicked=[]}
+  render();window.scrollTo(0,0);
+}
+
+function replay(){
+  var pool=[];
+  if(S.selCh==='all')pool=ALL;
+  else if(S.selCh==='plurals')pool=ALL.filter(function(w){return hasPlural(w)});
+  else if(S.selCh==='verbs')pool=ALL.filter(function(w){return hasVerb(w)});
+  else{
+    var found=false;
+    TOMES.forEach(function(t){if(D[t][S.selCh]){pool=D[t][S.selCh];found=true}});
+    if(!found){
+      Object.keys(D[S.tome]).forEach(function(c){pool=pool.concat(D[S.tome][c])});
+    }
+  }
+  launch(pool,S.selCh);
+}
+
+function retryErr(){
+  var wrong=S.ans.filter(function(x){return !x.ok&&x.word}).map(function(x){return x.word});
+  if(wrong.length===0)return;
+  S.questions=buildQ(wrong,S.mode,'all',S.nc);
+  S.cur=0;S.cho=null;S.score=0;S.streak=0;S.ans=[];
+  S.puzzleFor=null;S.puzzleLetters=[];S.puzzlePicked=[];S.saved=false;
+  S.scr='quiz';render();window.scrollTo(0,0);
+}
+
+function goHome(){S.scr='home';render();window.scrollTo(0,0)}
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+render();
+</script>
+</body>
+</html>
